@@ -31,3 +31,4 @@ export default function NumberTicker({ value, className = '' }: NumberTickerProp
 
   return <span ref={ref} className={className}>{value}</span>;
 }
+

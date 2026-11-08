@@ -54,3 +54,4 @@ export default function FluidTabs({ tabs, activeTab, onChange, className = '' }:
     </div>
   );
 }
+
