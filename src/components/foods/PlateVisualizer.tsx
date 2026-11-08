@@ -1,36 +1,38 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, Heart } from 'lucide-react';
+import { PieChart, ShieldCheck } from 'lucide-react';
 
 export default function PlateVisualizer() {
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-3xl border border-stone-200/80 dark:border-slate-800 p-6 sm:p-8 shadow-sm">
-      <div className="flex items-center gap-2.5 mb-6">
-        <span className="text-3xl">🍽️</span>
+    <div className="bg-white dark:bg-[#1c1c1e] rounded-3xl border border-zinc-200/80 dark:border-zinc-800 p-6 sm:p-8 shadow-sm">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-9 h-9 rounded-xl bg-[#30D158]/10 text-[#30D158] flex items-center justify-center">
+          <PieChart className="w-5 h-5" />
+        </div>
         <div>
-          <h2 className="text-xl font-black text-stone-900 dark:text-white">
-            La Regla del Plato Saludable & Porciones con las Manos
+          <h2 className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight">
+            Distribución del Plato Saludable & Porciones con las Manos
           </h2>
-          <p className="text-xs text-stone-500 dark:text-slate-400 font-medium">
-            Una forma ultra-intuitiva de armar comidas sin tener que pesar todo en una balanza.
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            Guía de referencia visual para estimar raciones sin depender exclusivamente de básculas de cocina.
           </p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        {/* Gráfico Visual del Plato */}
+        {/* Gráfico Visual del Plato estilo Apple Health */}
         <div className="md:col-span-5 flex flex-col items-center justify-center">
-          <div className="relative w-64 h-64 rounded-full border-8 border-stone-100 dark:border-slate-800 bg-stone-50/50 dark:bg-slate-800/40 p-3 shadow-inner flex items-center justify-center">
-            <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
+          <div className="relative w-64 h-64 rounded-full border-8 border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/40 p-3 flex items-center justify-center">
+            <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90 drop-shadow-sm">
               {/* Mitad Vegetales (1/2 = 50%) */}
               <circle
                 cx="50"
                 cy="50"
                 r="40"
                 fill="transparent"
-                stroke="#10b981"
-                strokeWidth="22"
+                stroke="#30D158"
+                strokeWidth="20"
                 strokeDasharray="125.6 125.6"
                 strokeDashoffset="0"
                 className="hover:opacity-90 transition-opacity"
@@ -41,8 +43,8 @@ export default function PlateVisualizer() {
                 cy="50"
                 r="40"
                 fill="transparent"
-                stroke="#8b5cf6"
-                strokeWidth="22"
+                stroke="#5856D6"
+                strokeWidth="20"
                 strokeDasharray="62.8 188.4"
                 strokeDashoffset="-125.6"
                 className="hover:opacity-90 transition-opacity"
@@ -53,8 +55,8 @@ export default function PlateVisualizer() {
                 cy="50"
                 r="40"
                 fill="transparent"
-                stroke="#f59e0b"
-                strokeWidth="22"
+                stroke="#FF9500"
+                strokeWidth="20"
                 strokeDasharray="62.8 188.4"
                 strokeDashoffset="-188.4"
                 className="hover:opacity-90 transition-opacity"
@@ -62,67 +64,67 @@ export default function PlateVisualizer() {
             </svg>
 
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
-              <span className="text-2xl mb-0.5">🥑</span>
-              <span className="text-[11px] font-black text-stone-800 dark:text-slate-100 uppercase tracking-wider">
-                Plato Balanceado
+              <span className="text-xl mb-0.5">🥑</span>
+              <span className="text-[11px] font-bold text-zinc-800 dark:text-zinc-200 uppercase tracking-wider">
+                Plato Clínico
               </span>
-              <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
-                100% Nutrición
+              <span className="text-[10px] font-semibold text-[#30D158]">
+                Equilibrio Diario
               </span>
             </div>
           </div>
         </div>
 
-        {/* Explicación de Secciones */}
+        {/* Explicación de Secciones estilo Apple Health */}
         <div className="md:col-span-7 space-y-3">
           {/* 1/2 Plato Vegetales */}
-          <div className="p-4 rounded-2xl border border-emerald-200/80 dark:border-emerald-900/60 bg-emerald-50/60 dark:bg-emerald-950/20 flex items-start gap-3.5 bouncy-hover">
-            <span className="text-2xl shrink-0">🥦</span>
+          <div className="p-4 rounded-2xl border border-[#30D158]/30 bg-[#30D158]/5 dark:bg-[#30D158]/10 flex items-start gap-3.5 apple-card-hover">
+            <span className="text-xl shrink-0">🥦</span>
             <div>
-              <p className="text-xs sm:text-sm font-black text-emerald-900 dark:text-emerald-200">
-                1/2 del Plato: Vegetales, Ensaladas y Hortalizas (~150 - 250g)
+              <p className="text-xs sm:text-sm font-bold text-[#30D158]">
+                1/2 del Plato: Vegetales y Hortalizas (~150 - 250g)
               </p>
-              <p className="text-xs text-stone-600 dark:text-slate-400 font-medium mt-0.5 leading-relaxed">
-                Aporta fibra, agua y micronutrientes esenciales. Medida visual: <strong>dos manos abiertas juntas</strong> o dos puños de ensalada cruda.
+              <p className="text-xs text-zinc-600 dark:text-zinc-300 mt-0.5 leading-relaxed">
+                Aporte fundamental de fibra, agua y micronutrientes. Medida visual: <strong>dos manos abiertas juntas</strong> o dos puños de verdura cruda.
               </p>
             </div>
           </div>
 
           {/* 1/4 Plato Proteína */}
-          <div className="p-4 rounded-2xl border border-purple-200/80 dark:border-purple-900/60 bg-purple-50/60 dark:bg-purple-950/20 flex items-start gap-3.5 bouncy-hover">
-            <span className="text-2xl shrink-0">🍗</span>
+          <div className="p-4 rounded-2xl border border-[#5856D6]/30 bg-[#5856D6]/5 dark:bg-[#5856D6]/10 flex items-start gap-3.5 apple-card-hover">
+            <span className="text-xl shrink-0">🍗</span>
             <div>
-              <p className="text-xs sm:text-sm font-black text-purple-900 dark:text-purple-200">
+              <p className="text-xs sm:text-sm font-bold text-[#5856D6]">
                 1/4 del Plato: Proteína Magra (~120 - 150g)
               </p>
-              <p className="text-xs text-stone-600 dark:text-slate-400 font-medium mt-0.5 leading-relaxed">
-                Pechuga de pollo, pescado blanco o azul, huevos, lomo o tofu. Medida visual: <strong>1 palma de mano abierta</strong> (sin contar los dedos).
+              <p className="text-xs text-zinc-600 dark:text-zinc-300 mt-0.5 leading-relaxed">
+                Pollo, pescado, carnes magras, huevos o tofu. Medida visual: <strong>1 palma de mano abierta</strong> (sin contar los dedos).
               </p>
             </div>
           </div>
 
           {/* 1/4 Plato Carbohidratos */}
-          <div className="p-4 rounded-2xl border border-amber-200/80 dark:border-amber-900/60 bg-amber-50/60 dark:bg-amber-950/20 flex items-start gap-3.5 bouncy-hover">
-            <span className="text-2xl shrink-0">🍚</span>
+          <div className="p-4 rounded-2xl border border-[#FF9500]/30 bg-[#FF9500]/5 dark:bg-[#FF9500]/10 flex items-start gap-3.5 apple-card-hover">
+            <span className="text-xl shrink-0">🍚</span>
             <div>
-              <p className="text-xs sm:text-sm font-black text-amber-900 dark:text-amber-200">
+              <p className="text-xs sm:text-sm font-bold text-[#FF9500]">
                 1/4 del Plato: Carbohidratos Complejos (~120 - 150g)
               </p>
-              <p className="text-xs text-stone-600 dark:text-slate-400 font-medium mt-0.5 leading-relaxed">
-                Arroz blanco o integral, papas cocidas, avena, pasta, camote o quinoa. Medida visual: <strong>1 puño cerrado</strong> o 1 taza medidora.
+              <p className="text-xs text-zinc-600 dark:text-zinc-300 mt-0.5 leading-relaxed">
+                Arroz, papas cocidas, avena, pasta, camote o quinoa. Medida visual: <strong>1 puño cerrado</strong> o 1 taza de cocina.
               </p>
             </div>
           </div>
 
           {/* Grasas Saludables */}
-          <div className="p-3.5 rounded-2xl border border-pink-200/80 dark:border-pink-900/60 bg-pink-50/60 dark:bg-pink-950/20 flex items-start gap-3.5 bouncy-hover">
-            <span className="text-2xl shrink-0">🥑</span>
+          <div className="p-3.5 rounded-2xl border border-[#FF2D55]/30 bg-[#FF2D55]/5 dark:bg-[#FF2D55]/10 flex items-start gap-3.5 apple-card-hover">
+            <span className="text-xl shrink-0">🥑</span>
             <div>
-              <p className="text-xs sm:text-sm font-black text-pink-900 dark:text-pink-200">
+              <p className="text-xs sm:text-sm font-bold text-[#FF2D55]">
                 Grasas Saludables de Acompañamiento (~10 - 20g)
               </p>
-              <p className="text-xs text-stone-600 dark:text-slate-400 font-medium mt-0.5">
-                Aceite de oliva virgen extra, frutos secos o 1/4 de aguacate. Medida visual: el tamaño de <strong>1 dedo pulgar</strong>.
+              <p className="text-xs text-zinc-600 dark:text-zinc-300 mt-0.5">
+                Aceite de oliva virgen extra, frutos secos o 1/4 de aguacate. Medida visual: el volumen de <strong>1 dedo pulgar</strong>.
               </p>
             </div>
           </div>
