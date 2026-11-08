@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { useNutrition } from '../../context/NutritionContext';
 import { Check, Sparkles } from 'lucide-react';
 
@@ -34,13 +35,15 @@ export default function StepIndicator() {
   const progressPercentage = ((currentStep - 1) / (steps.length - 1)) * 100;
 
   return (
-    <div className="w-full bg-white dark:bg-slate-900 border-b border-stone-200/80 dark:border-slate-800 py-4 px-4 shadow-sm">
+    <div className="w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-stone-200/80 dark:border-slate-800 py-4 px-4 shadow-sm sticky top-20 z-20">
       <div className="max-w-4xl mx-auto">
-        {/* Barra superior de progreso estilo Duolingo */}
-        <div className="w-full h-2.5 bg-stone-100 dark:bg-slate-800 rounded-full overflow-hidden mb-4">
-          <div
-            style={{ width: `${Math.max(15, progressPercentage)}%` }}
-            className="h-full bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-500 shadow-sm"
+        {/* Barra superior animada con Framer Motion */}
+        <div className="w-full h-2 bg-stone-100 dark:bg-slate-800 rounded-full overflow-hidden mb-3.5 relative">
+          <motion.div
+            initial={false}
+            animate={{ width: `${Math.max(15, progressPercentage)}%` }}
+            transition={{ type: 'spring', damping: 25, stiffness: 120 }}
+            className="h-full bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 rounded-full shadow-sm"
           />
         </div>
 
@@ -54,9 +57,9 @@ export default function StepIndicator() {
               <button
                 key={step.number}
                 onClick={() => setCurrentStep(step.number as 1 | 2 | 3)}
-                className={`p-3 rounded-2xl border text-left transition-all bouncy-hover ${
+                className={`p-3 sm:p-3.5 rounded-2xl border text-left transition-all bouncy-hover relative overflow-hidden ${
                   isActive
-                    ? 'border-emerald-400 bg-emerald-50/70 dark:bg-emerald-950/30 ring-2 ring-emerald-400 shadow-sm'
+                    ? 'border-emerald-400 bg-emerald-50/70 dark:bg-emerald-950/30 ring-2 ring-emerald-400 shadow-md'
                     : isDone
                     ? 'border-stone-200 dark:border-slate-800 bg-stone-50/80 dark:bg-slate-800/40 opacity-80'
                     : 'border-stone-200/80 dark:border-slate-800 hover:bg-stone-50 dark:hover:bg-slate-800/40'
@@ -66,18 +69,23 @@ export default function StepIndicator() {
                   <span className="text-xl sm:text-2xl">{step.emoji}</span>
                   <div className="min-w-0 flex-1">
                     <p
-                      className={`text-xs sm:text-sm font-extrabold truncate ${
+                      className={`text-xs sm:text-sm font-black truncate ${
                         isActive
-                          ? 'text-emerald-800 dark:text-emerald-300'
+                          ? 'text-emerald-900 dark:text-emerald-300'
                           : 'text-stone-800 dark:text-slate-200'
                       }`}
                     >
                       {step.title}
                     </p>
                   </div>
+                  {isDone && (
+                    <span className="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] font-black shrink-0">
+                      <Check className="w-3 h-3 stroke-[3]" />
+                    </span>
+                  )}
                 </div>
 
-                <p className="text-[11px] font-semibold text-stone-500 dark:text-slate-400 truncate pl-1">
+                <p className="text-[11px] font-bold text-stone-500 dark:text-slate-400 truncate pl-1">
                   {step.helper}
                 </p>
               </button>

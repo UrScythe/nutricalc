@@ -1,7 +1,9 @@
 'use client';
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { useNutrition } from '../../context/NutritionContext';
+import NumberTicker from '../ui/NumberTicker';
 import { ArrowRight, Sparkles, Heart } from 'lucide-react';
 
 export default function RealTimeBalance() {
@@ -50,39 +52,45 @@ export default function RealTimeBalance() {
     };
   }
 
-  // Dimensiones SVG
-  const size = 160;
-  const strokeWidth = 14;
+  // Dimensiones SVG Radial
+  const size = 180;
+  const strokeWidth = 16;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (Math.min(100, percentConsumed) / 100) * circumference;
+  const progressRatio = Math.min(1, percentConsumed / 100);
+  const strokeDashoffset = circumference - progressRatio * circumference;
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-3xl border border-stone-200/80 dark:border-slate-800 p-6 sm:p-7 shadow-sm">
+    <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl rounded-3xl border border-stone-200/80 dark:border-slate-800 p-6 sm:p-8 shadow-sm">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs font-bold mb-1.5">
-            <Heart className="w-3.5 h-3.5 text-pink-500 fill-pink-500" /> Energía & Nutrientes en Vivo
+            <Heart className="w-3.5 h-3.5 text-pink-500 fill-pink-500" />
+            <span>Balance Energético en Tiempo Real (21st.dev Gauge)</span>
           </div>
           <h3 className="text-xl font-black text-stone-900 dark:text-white">
-            ¿Cómo vamos con la meta de hoy?
+            Meta del Día: <NumberTicker value={targetKcal} /> kcal
           </h3>
           <p className="text-xs text-stone-500 dark:text-slate-400 font-medium">
-            Gasto objetivo: <strong>{targetKcal} kcal</strong> vs Ingesta acumulada.
+            Comparativa dinámica entre el gasto energético total y la comida servida.
           </p>
         </div>
 
-        <div className={`px-4 py-2 rounded-2xl text-xs font-black flex items-center gap-2 ${statusBadge.color}`}>
+        <motion.div
+          layout
+          className={`px-4 py-2 rounded-2xl text-xs font-black flex items-center gap-2 ${statusBadge.color} shadow-sm`}
+        >
           <span className="text-base">{statusBadge.emoji}</span>
           <span>{statusBadge.title}</span>
-        </div>
+        </motion.div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-        {/* Gráfico Donut Cálido */}
+        {/* Radial Progress Gauge animado con Framer Motion */}
         <div className="md:col-span-5 flex flex-col items-center justify-center">
           <div className="relative" style={{ width: size, height: size }}>
             <svg width={size} height={size} className="transform -rotate-90">
+              {/* Track base */}
               <circle
                 cx={size / 2}
                 cy={size / 2}
@@ -92,35 +100,39 @@ export default function RealTimeBalance() {
                 fill="transparent"
                 className="text-stone-100 dark:text-slate-800"
               />
-              <circle
+              {/* Anillo de progreso animado */}
+              <motion.circle
                 cx={size / 2}
                 cy={size / 2}
                 r={radius}
                 stroke="currentColor"
                 strokeWidth={strokeWidth}
                 strokeDasharray={circumference}
-                strokeDashoffset={strokeDashoffset}
                 strokeLinecap="round"
                 fill="transparent"
-                className={`transition-all duration-700 ${
+                initial={{ strokeDashoffset: circumference }}
+                animate={{ strokeDashoffset }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className={
                   ratio > 1.15
-                    ? 'text-rose-400'
+                    ? 'text-rose-500'
                     : ratio >= 0.9
-                    ? 'text-emerald-400'
-                    : 'text-amber-400'
-                }`}
+                    ? 'text-emerald-500'
+                    : 'text-amber-500'
+                }
               />
             </svg>
 
+            {/* Contador de calorías NumberTicker en el centro */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-              <span className="text-3xl font-black text-stone-900 dark:text-white">
-                {currentKcal}
+              <span className="text-3xl sm:text-4xl font-black text-stone-900 dark:text-white tracking-tight">
+                <NumberTicker value={currentKcal} />
               </span>
-              <span className="text-[10px] uppercase font-bold text-stone-400">
+              <span className="text-[10px] uppercase font-bold text-stone-400 mt-0.5">
                 de {targetKcal} kcal
               </span>
-              <span className="text-xs font-black text-emerald-600 dark:text-emerald-400 mt-0.5">
-                {percentConsumed}% del día
+              <span className="text-xs font-black text-emerald-600 dark:text-emerald-400 mt-1">
+                {percentConsumed}% completado
               </span>
             </div>
           </div>
@@ -129,7 +141,7 @@ export default function RealTimeBalance() {
           </p>
         </div>
 
-        {/* Cajas de Macros con Colores Bubbly */}
+        {/* Tarjetas Bento de Macronutrientes con Ticker */}
         <div className="md:col-span-7 space-y-4">
           <div className="grid grid-cols-3 gap-3 text-center">
             {/* Proteínas */}
@@ -139,7 +151,7 @@ export default function RealTimeBalance() {
                 Proteína
               </p>
               <p className="text-xl font-black text-stone-900 dark:text-white mt-0.5">
-                {intakeTotals.protein}g
+                <NumberTicker value={intakeTotals.protein} />g
               </p>
               <p className="text-[10px] text-stone-400 font-bold">
                 {Math.round(intakeTotals.protein * 4)} kcal
@@ -153,7 +165,7 @@ export default function RealTimeBalance() {
                 Carbos
               </p>
               <p className="text-xl font-black text-stone-900 dark:text-white mt-0.5">
-                {intakeTotals.carbs}g
+                <NumberTicker value={intakeTotals.carbs} />g
               </p>
               <p className="text-[10px] text-stone-400 font-bold">
                 {Math.round(intakeTotals.carbs * 4)} kcal
@@ -167,7 +179,7 @@ export default function RealTimeBalance() {
                 Grasas
               </p>
               <p className="text-xl font-black text-stone-900 dark:text-white mt-0.5">
-                {intakeTotals.fat}g
+                <NumberTicker value={intakeTotals.fat} />g
               </p>
               <p className="text-[10px] text-stone-400 font-bold">
                 {Math.round(intakeTotals.fat * 9)} kcal

@@ -61,3 +61,4 @@ CREATE TABLE IF NOT EXISTS custom_foods (
 CREATE INDEX IF NOT EXISTS idx_consultations_patient_id ON consultations(patient_id);
 CREATE INDEX IF NOT EXISTS idx_consultations_date ON consultations(consultation_date DESC);
 CREATE INDEX IF NOT EXISTS idx_custom_foods_category ON custom_foods(category);
+
