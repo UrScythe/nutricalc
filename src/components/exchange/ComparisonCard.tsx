@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { FoodEntry, ExchangeSuggestion } from '../../types';
-import { Check, Sparkles } from 'lucide-react';
+import { Check, ShieldCheck } from 'lucide-react';
 
 interface ComparisonCardProps {
   original: FoodEntry;
@@ -16,20 +16,20 @@ export default function ComparisonCard({
   onApply,
 }: ComparisonCardProps) {
   return (
-    <div className="p-5 rounded-3xl border border-stone-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:border-emerald-300 transition-all bouncy-hover">
+    <div className="p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-[#1c1c1e] shadow-sm hover:border-[#0A84FF] transition-all apple-card-hover">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <span className="text-xs uppercase font-black px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+          <span className="text-[10px] uppercase font-bold px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
             {replacement.food.category}
           </span>
           {replacement.isExactMatch && (
-            <span className="text-xs font-black px-3 py-1 rounded-full bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300 flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5" /> ¡Equivalencia exacta (±5%)!
+            <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#30D158]/15 text-[#30D158] flex items-center gap-1">
+              <ShieldCheck className="w-3 h-3" /> Equivalencia exacta (±5%)
             </span>
           )}
         </div>
 
-        <span className="text-xs font-bold text-stone-400">
+        <span className="text-xs font-semibold text-zinc-400">
           Δ {replacement.caloriesDiffPercent}% calorías
         </span>
       </div>
@@ -37,45 +37,45 @@ export default function ComparisonCard({
       {/* Mini-tarjeta comparativa lado a lado */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
         {/* Original */}
-        <div className="p-4 rounded-2xl bg-stone-50 dark:bg-slate-800/50 border border-stone-200/60 dark:border-slate-800 text-xs">
-          <p className="text-[10px] text-stone-400 font-black uppercase mb-1">
-            Alimento Actual en el Plato
+        <div className="p-3.5 rounded-xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200/60 dark:border-zinc-700/50 text-xs">
+          <p className="text-[10px] text-zinc-400 font-bold uppercase mb-1">
+            Alimento Actual
           </p>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-2xl">🍽️</span>
+            <span className="text-xl">🍽️</span>
             <div>
-              <p className="font-black text-stone-900 dark:text-white text-sm">
+              <p className="font-bold text-zinc-900 dark:text-white text-xs sm:text-sm">
                 {original.foodName}
               </p>
-              <p className="text-stone-500 font-bold">
+              <p className="text-zinc-500 font-medium">
                 {original.portionUsed || `${original.grams}g`}
               </p>
             </div>
           </div>
-          <div className="pt-2 border-t border-stone-200/60 dark:border-slate-700/60 flex items-center justify-between text-stone-600 dark:text-slate-300">
-            <span className="font-black text-stone-900 dark:text-white">{original.calories} kcal</span>
+          <div className="pt-2 border-t border-zinc-200/60 dark:border-zinc-700/60 flex items-center justify-between text-zinc-600 dark:text-zinc-300">
+            <span className="font-bold text-zinc-900 dark:text-white">{original.calories} kcal</span>
             <span>P: {original.protein}g • C: {original.carbs}g • G: {original.fat}g</span>
           </div>
         </div>
 
         {/* Reemplazo */}
-        <div className="p-4 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-300/80 dark:border-emerald-800 text-xs relative">
-          <p className="text-[10px] text-emerald-700 dark:text-emerald-300 font-black uppercase mb-1 flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-emerald-500" /> Reemplazo Equivalente
+        <div className="p-3.5 rounded-xl bg-[#0A84FF]/5 dark:bg-[#0A84FF]/10 border border-[#0A84FF]/30 text-xs relative">
+          <p className="text-[10px] text-[#0A84FF] font-bold uppercase mb-1 flex items-center gap-1">
+            Opción de Sustitución
           </p>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-2xl">{replacement.food.emoji || '✨'}</span>
+            <span className="text-xl">{replacement.food.emoji || '🍽️'}</span>
             <div>
-              <p className="font-black text-emerald-950 dark:text-emerald-200 text-sm">
+              <p className="font-bold text-zinc-900 dark:text-white text-xs sm:text-sm">
                 {replacement.food.name}
               </p>
-              <p className="text-emerald-700 dark:text-emerald-400 font-bold">
+              <p className="text-[#0A84FF] font-semibold">
                 {replacement.portionLabel} ({replacement.grams}g)
               </p>
             </div>
           </div>
-          <div className="pt-2 border-t border-emerald-200 dark:border-emerald-800 flex items-center justify-between text-emerald-800 dark:text-emerald-300">
-            <span className="font-black text-emerald-900 dark:text-emerald-200">{replacement.calories} kcal</span>
+          <div className="pt-2 border-t border-[#0A84FF]/20 flex items-center justify-between text-zinc-700 dark:text-zinc-300">
+            <span className="font-bold text-zinc-900 dark:text-white">{replacement.calories} kcal</span>
             <span>P: {replacement.protein}g • C: {replacement.carbs}g • G: {replacement.fat}g</span>
           </div>
         </div>
@@ -85,10 +85,10 @@ export default function ComparisonCard({
       <button
         type="button"
         onClick={onApply}
-        className="w-full py-3 px-5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-black shadow-md shadow-emerald-600/20 transition flex items-center justify-center gap-2 bouncy-hover"
+        className="w-full py-2.5 px-4 rounded-xl bg-[#0071e3] hover:bg-[#0077ED] text-white text-xs font-bold shadow-sm transition flex items-center justify-center gap-2 apple-btn"
       >
         <Check className="w-4 h-4" />
-        <span>¡Me encanta, aplicar cambio en el plato! ✨</span>
+        <span>Aplicar Reemplazo en la Dieta</span>
       </button>
     </div>
   );
