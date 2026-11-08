@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useNutrition } from '../../context/NutritionContext';
-import { Trash2, RotateCcw, CheckCircle, AlertCircle, Sparkles } from 'lucide-react';
+import { Trash2, RotateCcw, CheckCircle2, AlertCircle, Clock } from 'lucide-react';
 
 export default function ActivityList() {
   const {
@@ -18,24 +18,24 @@ export default function ActivityList() {
   const remainingHours = (Math.abs(remainingMinutes) / 60).toFixed(1);
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-3xl border border-stone-200/80 dark:border-slate-800 p-6 shadow-sm flex flex-col justify-between">
+    <div className="bg-white dark:bg-[#1c1c1e] rounded-3xl p-6 border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex flex-col justify-between">
       <div>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-lg font-black text-stone-900 dark:text-white">
-                El reloj de sus 24 Horas
+              <h3 className="text-base font-bold text-zinc-900 dark:text-white tracking-tight">
+                Cronograma de 24 Horas
               </h3>
               <span
-                className={`text-xs px-2.5 py-0.5 rounded-full font-black flex items-center gap-1 ${
+                className={`text-[11px] px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1 ${
                   getdResult.is24hComplete
-                    ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
-                    : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
+                    ? 'bg-[#30D158]/15 text-[#30D158]'
+                    : 'bg-amber-500/15 text-amber-500'
                 }`}
               >
                 {getdResult.is24hComplete ? (
                   <>
-                    <CheckCircle className="w-3.5 h-3.5" /> ¡24h Completas!
+                    <CheckCircle2 className="w-3.5 h-3.5" /> 24h Completas
                   </>
                 ) : (
                   <>
@@ -47,8 +47,8 @@ export default function ActivityList() {
                 )}
               </span>
             </div>
-            <p className="text-xs text-stone-500 dark:text-slate-400 font-medium mt-0.5">
-              Total asignado: <strong>{totalHours} horas</strong> de 24 horas del día.
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+              Total asignado: <strong>{totalHours}h</strong> de 24.0h del ciclo diario.
             </p>
           </div>
 
@@ -56,33 +56,33 @@ export default function ActivityList() {
             <button
               type="button"
               onClick={loadPreset24h}
-              className="px-3 py-1.5 text-xs font-bold rounded-xl bg-stone-100 dark:bg-slate-800 text-stone-700 dark:text-slate-300 hover:bg-stone-200 transition flex items-center gap-1.5 bouncy-hover"
+              className="px-3 py-1.5 text-xs font-semibold rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition flex items-center gap-1.5 apple-btn"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              <span>Día Típico</span>
+              <span>Día Estándar</span>
             </button>
             <button
               type="button"
               onClick={clearActivities}
-              className="px-2.5 py-1.5 text-xs font-bold text-rose-500 hover:bg-rose-50 rounded-xl transition"
+              className="px-2.5 py-1.5 text-xs font-semibold text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/30 rounded-xl transition apple-btn"
             >
-              Vaciar
+              Limpiar
             </button>
           </div>
         </div>
 
-        {/* Barra de progreso de colores vivos */}
-        <div className="w-full h-4 bg-stone-100 dark:bg-slate-800 rounded-full overflow-hidden flex mb-4 shadow-inner">
+        {/* Barra de progreso de colores vivos estilo Apple Fitness */}
+        <div className="w-full h-3.5 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden flex mb-4">
           {activities.map((act, index) => {
             const percentage = (act.durationMinutes / 1440) * 100;
             const colors = [
-              'bg-indigo-400',
-              'bg-blue-400',
-              'bg-teal-400',
-              'bg-emerald-400',
-              'bg-amber-400',
-              'bg-orange-400',
-              'bg-purple-400',
+              'bg-[#0A84FF]',
+              'bg-[#30D158]',
+              'bg-[#FF2D55]',
+              'bg-[#00C7BE]',
+              'bg-[#FF9500]',
+              'bg-[#AF52DE]',
+              'bg-[#5856D6]',
             ];
             const color = colors[index % colors.length];
 
@@ -99,12 +99,12 @@ export default function ActivityList() {
 
         {/* Lista de Actividades Asignadas */}
         {activities.length === 0 ? (
-          <div className="text-center py-10 text-stone-400 text-xs">
-            <p className="text-2xl mb-1">⏱️</p>
-            <p className="font-bold">Aún no has agregado actividades.</p>
+          <div className="text-center py-10 text-zinc-400 text-xs">
+            <Clock className="w-6 h-6 mx-auto mb-1.5 opacity-40 text-zinc-400" />
+            <p className="font-semibold">No se han registrado actividades para este ciclo.</p>
             <button
               onClick={loadPreset24h}
-              className="mt-2 text-blue-600 dark:text-blue-400 font-extrabold underline"
+              className="mt-2 text-[#0A84FF] font-bold hover:underline"
             >
               Cargar distribución típica recomendada
             </button>
@@ -118,30 +118,30 @@ export default function ActivityList() {
               return (
                 <div
                   key={act.id}
-                  className="p-3 rounded-2xl border border-stone-100 dark:border-slate-800 bg-stone-50/60 dark:bg-slate-800/40 flex items-center justify-between gap-2"
+                  className="p-3 rounded-2xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-800/40 flex items-center justify-between gap-2"
                 >
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs font-black text-stone-900 dark:text-white truncate">
+                    <p className="text-xs font-bold text-zinc-900 dark:text-white truncate">
                       {act.name}
                     </p>
-                    <p className="text-[11px] font-semibold text-stone-500 dark:text-slate-400 flex items-center gap-2">
+                    <p className="text-[11px] text-zinc-500 dark:text-zinc-400 flex items-center gap-2">
                       <span>{act.met} METs</span>
                       <span>•</span>
-                      <strong className="text-emerald-600 dark:text-emerald-400">
+                      <strong className="text-[#30D158]">
                         {act.caloriesBurned} kcal
                       </strong>
                     </p>
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0">
-                    <span className="text-xs font-bold px-2.5 py-1 bg-white dark:bg-slate-900 rounded-xl border border-stone-200 dark:border-slate-700 text-stone-700 dark:text-slate-300">
+                    <span className="text-xs font-semibold px-2.5 py-1 bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300">
                       {hours}h {mins > 0 ? `${mins}m` : ''}
                     </span>
                     <button
                       type="button"
                       onClick={() => removeActivity(act.id)}
-                      className="p-1.5 rounded-lg text-stone-400 hover:text-rose-500 hover:bg-rose-50 transition"
-                      title="Quitar"
+                      className="p-1.5 rounded-lg text-zinc-400 hover:text-rose-500 transition apple-btn"
+                      title="Eliminar"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>

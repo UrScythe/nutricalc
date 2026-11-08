@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { useNutrition } from '../../context/NutritionContext';
 import { COMPENDIUM_ACTIVITIES } from '../../data/activities';
 import { Activity } from '../../types';
-import { Search, Plus, Check, Clock, Sparkles } from 'lucide-react';
+import { Search, Plus, Check, Activity as ActivityIcon } from 'lucide-react';
 
 export default function ActivitySearch() {
   const { addActivity, biometrics } = useNutrition();
@@ -41,29 +41,30 @@ export default function ActivitySearch() {
     : 0;
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-3xl border border-stone-200/80 dark:border-slate-800 p-6 shadow-sm flex flex-col justify-between">
+    <div className="bg-white dark:bg-[#1c1c1e] rounded-3xl p-6 border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex flex-col justify-between">
       <div>
         <div className="mb-4">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 text-xs font-bold mb-1.5">
-            <Sparkles className="w-3.5 h-3.5" /> Compendio de Ainsworth
-          </div>
-          <h3 className="text-lg font-black text-stone-900 dark:text-white">
-            ¿Cómo se mueve en su día a día?
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#0A84FF] flex items-center gap-1.5">
+            <ActivityIcon className="w-3.5 h-3.5" />
+            <span>Compendio de Ainsworth</span>
+          </span>
+          <h3 className="text-base font-bold text-zinc-900 dark:text-white tracking-tight mt-0.5">
+            Gasto por Actividad (METs)
           </h3>
-          <p className="text-xs text-stone-500 dark:text-slate-400 font-medium">
-            Elige una actividad para sumarla a su ciclo de 24 horas.
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            Asigna tiempo a cada actividad para completar el ciclo de 24 horas.
           </p>
         </div>
 
         {/* Buscador */}
         <div className="relative mb-3">
-          <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-3 pointer-events-none" />
+          <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-3 pointer-events-none" />
           <input
             type="text"
             placeholder="Buscar actividad (dormir, oficina, caminar, pesas)..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 rounded-2xl text-xs sm:text-sm font-semibold text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-400"
+            className="w-full pl-10 pr-4 py-2 bg-zinc-50 dark:bg-zinc-800/80 border border-zinc-200/80 dark:border-zinc-700 rounded-xl text-xs sm:text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0A84FF]"
           />
         </div>
 
@@ -74,7 +75,7 @@ export default function ActivitySearch() {
             { id: 'act_04', name: 'Oficina', emoji: '💼' },
             { id: 'act_10', name: 'Caminar', emoji: '🚶‍♂️' },
             { id: 'act_12', name: 'Pesas', emoji: '🏋️' },
-            { id: 'act_17', name: 'Bici', emoji: '🚴' },
+            { id: 'act_17', name: 'Ciclismo', emoji: '🚴' },
             { id: 'act_14', name: 'CrossFit', emoji: '🔥' },
           ].map((quick) => {
             const found = COMPENDIUM_ACTIVITIES.find((a) => a.id === quick.id);
@@ -85,10 +86,10 @@ export default function ActivitySearch() {
                 key={quick.id}
                 type="button"
                 onClick={() => setSelectedActivity(found)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all bouncy-hover ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all apple-btn ${
                   isSelected
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'bg-stone-100 dark:bg-slate-800 text-stone-700 dark:text-slate-300'
+                    ? 'bg-[#0A84FF] text-white shadow-sm'
+                    : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
                 }`}
               >
                 {quick.emoji} {quick.name}
@@ -98,7 +99,7 @@ export default function ActivitySearch() {
         </div>
 
         {/* Lista desplegable scrolleable de actividades */}
-        <div className="max-h-44 overflow-y-auto space-y-1.5 pr-1 mb-4">
+        <div className="max-h-48 overflow-y-auto space-y-1.5 pr-1 mb-4">
           {filteredActivities.map((act) => {
             const isSelected = selectedActivity?.id === act.id;
             return (
@@ -106,25 +107,25 @@ export default function ActivitySearch() {
                 key={act.id}
                 type="button"
                 onClick={() => setSelectedActivity(act)}
-                className={`w-full text-left p-3 rounded-2xl border transition-all flex items-center justify-between bouncy-hover ${
+                className={`w-full text-left p-3 rounded-2xl border transition-all flex items-center justify-between apple-btn ${
                   isSelected
-                    ? 'border-blue-400 bg-blue-50/70 dark:bg-blue-950/40 ring-2 ring-blue-400 shadow-sm'
-                    : 'border-stone-100 dark:border-slate-800 hover:bg-stone-50 dark:hover:bg-slate-800/40'
+                    ? 'border-[#0A84FF] bg-[#0A84FF]/5 dark:bg-[#0A84FF]/10 shadow-sm'
+                    : 'border-zinc-100 dark:border-zinc-800/80 hover:bg-zinc-50 dark:hover:bg-zinc-800/40'
                 }`}
               >
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xl">{act.emoji || '⚡'}</span>
+                  <span className="text-lg">{act.emoji || '⚡'}</span>
                   <div>
-                    <p className="text-xs font-extrabold text-stone-900 dark:text-white">
+                    <p className="text-xs font-bold text-zinc-900 dark:text-white">
                       {act.name}
                     </p>
-                    <p className="text-[11px] text-stone-500 dark:text-slate-400">
+                    <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
                       {act.description}
                     </p>
                   </div>
                 </div>
 
-                <span className="text-xs font-black px-2.5 py-1 rounded-xl bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
                   {act.met} METs
                 </span>
               </button>
@@ -135,29 +136,29 @@ export default function ActivitySearch() {
 
       {/* Selector de Tiempo y Agregar */}
       {selectedActivity && (
-        <div className="pt-3 border-t border-stone-100 dark:border-slate-800 bg-stone-50/70 dark:bg-slate-800/40 p-4 rounded-2xl">
+        <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/40 p-4 rounded-2xl">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <p className="text-xs font-black text-stone-900 dark:text-white">
+              <p className="text-xs font-bold text-zinc-900 dark:text-white">
                 {selectedActivity.emoji} {selectedActivity.name}
               </p>
-              <p className="text-xs text-blue-600 dark:text-blue-400 font-bold mt-0.5">
-                🔥 Gasto estimado: {previewCalories} kcal ({selectedActivity.met} METs)
+              <p className="text-xs text-[#0A84FF] font-semibold mt-0.5">
+                Gasto estimado: {previewCalories} kcal ({selectedActivity.met} METs)
               </p>
             </div>
 
             <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1 bg-white dark:bg-slate-900 px-3 py-1.5 rounded-xl border border-stone-200 dark:border-slate-700 shadow-inner">
+              <div className="flex items-center gap-1 bg-white dark:bg-zinc-900 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-700">
                 <input
                   type="number"
                   min={0}
                   max={24}
                   value={durationHours}
                   onChange={(e) => setDurationHours(Math.max(0, Number(e.target.value)))}
-                  className="w-8 text-center text-xs font-black bg-transparent text-stone-900 dark:text-white focus:outline-none"
+                  className="w-7 text-center text-xs font-bold bg-transparent text-zinc-900 dark:text-white focus:outline-none"
                 />
-                <span className="text-xs text-stone-400 font-bold">h</span>
-                <span className="text-stone-300 font-bold">:</span>
+                <span className="text-xs text-zinc-400">h</span>
+                <span className="text-zinc-300">:</span>
                 <input
                   type="number"
                   min={0}
@@ -165,18 +166,18 @@ export default function ActivitySearch() {
                   step={5}
                   value={durationMinutes}
                   onChange={(e) => setDurationMinutes(Math.max(0, Math.min(59, Number(e.target.value))))}
-                  className="w-8 text-center text-xs font-black bg-transparent text-stone-900 dark:text-white focus:outline-none"
+                  className="w-7 text-center text-xs font-bold bg-transparent text-zinc-900 dark:text-white focus:outline-none"
                 />
-                <span className="text-xs text-stone-400 font-bold">m</span>
+                <span className="text-xs text-zinc-400">m</span>
               </div>
 
               <button
                 type="button"
                 onClick={handleAdd}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-black shadow-md shadow-blue-600/20 transition bouncy-hover"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#0A84FF] hover:bg-[#0071e3] text-white text-xs font-bold shadow-sm transition apple-btn"
               >
                 {addedNotice ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                <span>{addedNotice ? '¡Añadida!' : 'Agregar'}</span>
+                <span>{addedNotice ? 'Añadida' : 'Agregar'}</span>
               </button>
             </div>
           </div>

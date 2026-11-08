@@ -7,15 +7,13 @@ import { useNutrition } from '../../context/NutritionContext';
 import {
   Sun,
   Moon,
-  Users,
-  Database,
-  History,
-  Save,
-  CheckCircle2,
-  Download,
+  User,
   Plus,
-  Sparkles,
-  Heart,
+  Save,
+  Check,
+  Download,
+  Activity,
+  Calendar,
 } from 'lucide-react';
 import PatientModal from '../patients/PatientModal';
 import BackupModal from '../backup/BackupModal';
@@ -48,64 +46,93 @@ export default function Header({ currentTab, setCurrentTab }: HeaderProps) {
     }
   };
 
+  // Obtener iniciales del paciente activo
+  const patientInitials = activePatient
+    ? activePatient.fullName
+        .split(' ')
+        .map((n) => n[0])
+        .slice(0, 2)
+        .join('')
+        .toUpperCase()
+    : 'PX';
+
+  const todayDateStr = new Intl.DateTimeFormat('es-ES', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+  }).format(new Date());
+
   return (
     <>
-      <header className="sticky top-0 z-30 border-b border-stone-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b border-zinc-200/80 dark:border-zinc-800/80 bg-white/80 dark:bg-[#121214]/80 backdrop-blur-xl">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo Amigable */}
+          <div className="flex items-center justify-between h-16">
+            {/* Logo estilo Apple Fitness */}
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-400 via-teal-400 to-amber-300 flex items-center justify-center text-2xl shadow-md shadow-emerald-500/20 bouncy-hover">
-                🥑
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#FF2D55] via-[#30D158] to-[#0A84FF] p-[2px] shadow-sm flex items-center justify-center">
+                <div className="w-full h-full bg-white dark:bg-black rounded-[10px] flex items-center justify-center">
+                  <Activity className="w-4 h-4 text-[#FF2D55]" />
+                </div>
               </div>
               <div>
-                <h1 className="text-xl font-extrabold tracking-tight text-stone-900 dark:text-white flex items-center gap-1.5">
-                  NutriCalc <span className="text-xs px-2.5 py-0.5 rounded-full font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">Amigable ✨</span>
-                </h1>
-                <p className="text-xs text-stone-500 dark:text-slate-400 font-medium">
-                  Nutrición fácil, visual y humana
+                <div className="flex items-center gap-1.5">
+                  <h1 className="text-base font-bold text-zinc-900 dark:text-white tracking-tight">
+                    NutriCalc
+                  </h1>
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+                    Health
+                  </span>
+                </div>
+                <p className="text-[11px] font-medium text-zinc-500 capitalize">
+                  {todayDateStr}
                 </p>
               </div>
             </div>
 
-            {/* Navegación Cálida */}
-            <nav className="hidden md:flex items-center gap-2 p-1.5 bg-stone-100/80 dark:bg-slate-800/80 rounded-2xl">
+            {/* Segmented Control iOS para Navegación Principal */}
+            <nav className="hidden md:flex items-center p-1 bg-zinc-100 dark:bg-zinc-800/80 rounded-xl border border-zinc-200/50 dark:border-zinc-700/50">
               <button
+                type="button"
                 onClick={() => setCurrentTab('evaluacion')}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bouncy-hover ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                   currentTab === 'evaluacion'
-                    ? 'bg-white dark:bg-slate-700 text-emerald-700 dark:text-emerald-300 shadow-sm'
-                    : 'text-stone-600 dark:text-slate-400 hover:text-stone-900'
+                    ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
-                🌱 Evaluación Guiada
+                Resumen de Salud
               </button>
               <button
+                type="button"
                 onClick={() => setCurrentTab('historial')}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bouncy-hover ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                   currentTab === 'historial'
-                    ? 'bg-white dark:bg-slate-700 text-emerald-700 dark:text-emerald-300 shadow-sm'
-                    : 'text-stone-600 dark:text-slate-400 hover:text-stone-900'
+                    ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
-                📖 Historial del Paciente
+                Historial Clínico
               </button>
               <button
+                type="button"
                 onClick={() => setCurrentTab('alimentos')}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all bouncy-hover ${
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                   currentTab === 'alimentos'
-                    ? 'bg-white dark:bg-slate-700 text-emerald-700 dark:text-emerald-300 shadow-sm'
-                    : 'text-stone-600 dark:text-slate-400 hover:text-stone-900'
+                    ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
-                🍽️ Mi Plato & Alimentos
+                Base de Alimentos
               </button>
             </nav>
 
-            {/* Paciente Activo & Acciones */}
+            {/* Selector de Paciente & Acciones Rápidas */}
             <div className="flex items-center gap-2">
-              {/* Selector de Paciente */}
-              <div className="relative flex items-center">
+              {/* Tarjeta de Paciente Activo estilo Apple Health Profile */}
+              <div className="flex items-center gap-2 pl-2 pr-3 py-1 bg-zinc-100 dark:bg-zinc-800/70 border border-zinc-200/60 dark:border-zinc-700/60 rounded-full">
+                <div className="w-6 h-6 rounded-full bg-[#0A84FF] text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                  {patientInitials}
+                </div>
                 <select
                   value={activePatient?.id || ''}
                   onChange={(e) => {
@@ -116,31 +143,33 @@ export default function Header({ currentTab, setCurrentTab }: HeaderProps) {
                       if (found) setActivePatient(found);
                     }
                   }}
-                  className="text-xs sm:text-sm pl-3 pr-7 py-2 bg-stone-100 dark:bg-slate-800 border-none rounded-xl text-stone-800 dark:text-slate-200 font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500 max-w-[150px] sm:max-w-[190px] truncate cursor-pointer shadow-inner"
+                  className="bg-transparent text-xs font-semibold text-zinc-900 dark:text-white focus:outline-none cursor-pointer max-w-[120px] sm:max-w-[150px] truncate"
                 >
                   {patients.map((p) => (
-                    <option key={p.id} value={p.id}>
-                      👤 {p.fullName}
+                    <option key={p.id} value={p.id} className="dark:bg-zinc-900 text-zinc-900 dark:text-white">
+                      {p.fullName}
                     </option>
                   ))}
-                  <option value="__new__">✨ + Nuevo Paciente...</option>
+                  <option value="__new__" className="dark:bg-zinc-900 font-bold text-[#0A84FF]">
+                    + Nuevo Paciente...
+                  </option>
                 </select>
+                <button
+                  type="button"
+                  onClick={() => setIsPatientModalOpen(true)}
+                  title="Nuevo Paciente"
+                  className="text-zinc-400 hover:text-zinc-900 dark:hover:text-white apple-btn"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                </button>
               </div>
 
-              {/* Botón Añadir Paciente */}
+              {/* Botón Guardar Consulta */}
               <button
-                onClick={() => setIsPatientModalOpen(true)}
-                title="Registrar nuevo paciente"
-                className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 transition bouncy-hover"
-              >
-                <Plus className="w-4 h-4" />
-              </button>
-
-              {/* Guardar Consulta */}
-              <button
+                type="button"
                 onClick={handleSaveConsultation}
-                title="Guardar consulta en el historial"
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold shadow-md shadow-emerald-600/20 transition bouncy-hover"
+                title="Guardar Registro"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0071e3] hover:bg-[#0077ED] text-white text-xs font-semibold shadow-sm transition apple-btn"
               >
                 <Save className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Guardar</span>
@@ -148,53 +177,73 @@ export default function Header({ currentTab, setCurrentTab }: HeaderProps) {
 
               {/* Backup */}
               <button
+                type="button"
                 onClick={() => setIsBackupModalOpen(true)}
-                title="Copias de Seguridad (JSON)"
-                className="p-2 rounded-xl bg-stone-100 dark:bg-slate-800 text-stone-600 dark:text-slate-300 hover:bg-stone-200 transition bouncy-hover"
+                title="Exportar/Importar Respaldo"
+                className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 flex items-center justify-center transition apple-btn"
               >
-                <Download className="w-4 h-4" />
+                <Download className="w-3.5 h-3.5" />
               </button>
 
-              {/* Tema */}
+              {/* Selector de Tema */}
               <button
+                type="button"
                 onClick={toggleTheme}
-                title="Cambiar tema"
-                className="p-2 rounded-xl bg-stone-100 dark:bg-slate-800 text-stone-600 dark:text-slate-300 hover:bg-stone-200 transition bouncy-hover"
+                title="Alternar Modo Oscuro"
+                className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 flex items-center justify-center transition apple-btn"
               >
-                {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-stone-600" />}
+                {theme === 'dark' ? (
+                  <Sun className="w-3.5 h-3.5 text-amber-400" />
+                ) : (
+                  <Moon className="w-3.5 h-3.5" />
+                )}
               </button>
             </div>
           </div>
 
-          {/* Menú móvil */}
-          <div className="flex md:hidden items-center justify-around py-2 border-t border-stone-100 dark:border-slate-800 text-xs font-bold text-stone-600 dark:text-slate-400">
+          {/* Menú Segmented Control para Móviles */}
+          <div className="flex md:hidden items-center justify-around py-2 border-t border-zinc-100 dark:border-zinc-800/80 text-xs font-semibold text-zinc-500">
             <button
               onClick={() => setCurrentTab('evaluacion')}
-              className={`py-1 px-2 rounded-lg ${currentTab === 'evaluacion' ? 'text-emerald-600 font-extrabold' : ''}`}
+              className={`py-1 px-3 rounded-lg ${
+                currentTab === 'evaluacion'
+                  ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-white font-bold'
+                  : ''
+              }`}
             >
-              🌱 Evaluación
+              Resumen
             </button>
             <button
               onClick={() => setCurrentTab('historial')}
-              className={`py-1 px-2 rounded-lg ${currentTab === 'historial' ? 'text-emerald-600 font-extrabold' : ''}`}
+              className={`py-1 px-3 rounded-lg ${
+                currentTab === 'historial'
+                  ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-white font-bold'
+                  : ''
+              }`}
             >
-              📖 Historial
+              Historial
             </button>
             <button
               onClick={() => setCurrentTab('alimentos')}
-              className={`py-1 px-2 rounded-lg ${currentTab === 'alimentos' ? 'text-emerald-600 font-extrabold' : ''}`}
+              className={`py-1 px-3 rounded-lg ${
+                currentTab === 'alimentos'
+                  ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-white font-bold'
+                  : ''
+              }`}
             >
-              🍽️ Alimentos
+              Alimentos
             </button>
           </div>
         </div>
       </header>
 
-      {/* Alerta amigable de guardado */}
+      {/* Toast de Guardado con Estilo iOS Dynamic Island / Notification */}
       {saveToast && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-5 py-3.5 bg-emerald-600 text-white rounded-2xl shadow-xl shadow-emerald-600/30 text-sm font-bold animate-bounce">
-          <Heart className="w-5 h-5 text-pink-200 fill-pink-200" />
-          <span>¡Genial! La consulta se guardó en el expediente con éxito.</span>
+        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-2.5 px-4 py-2.5 bg-zinc-900/90 dark:bg-white/95 text-white dark:text-zinc-900 rounded-full shadow-2xl backdrop-blur-xl text-xs font-semibold animate-fade-in border border-zinc-700/40">
+          <div className="w-4 h-4 rounded-full bg-[#30D158] flex items-center justify-center text-black">
+            <Check className="w-2.5 h-2.5 stroke-[3]" />
+          </div>
+          <span>Consulta guardada exitosamente en el expediente.</span>
         </div>
       )}
 

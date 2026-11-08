@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useNutrition } from '../context/NutritionContext';
+import AppleHealthHero from './dashboard/AppleHealthHero';
 import StepIndicator from './layout/StepIndicator';
 import BiometricForm from './profile/BiometricForm';
 import FormulaSelector from './profile/FormulaSelector';
@@ -31,12 +32,16 @@ export default function EvaluationDashboard() {
   const entriesInActiveMeal = foodEntries.filter((e) => e.meal === selectedMeal);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-5xl mx-auto px-4 sm:px-6">
+      {/* Resumen Ejecutivo Apple Health & Anillos de Actividad */}
+      <AppleHealthHero />
+
+      {/* Selector de Etapa Segmentado estilo iOS */}
       <StepIndicator />
 
-      {/* ==================== PASO 1: PERFIL & GASTO POR METS ==================== */}
+      {/* ==================== ETAPA 1: PERFIL & GASTO POR METS ==================== */}
       {currentStep === 1 && (
-        <div className="space-y-6 max-w-5xl mx-auto px-4">
+        <div className="space-y-6">
           <BiometricForm />
           <FormulaSelector />
 
@@ -49,9 +54,9 @@ export default function EvaluationDashboard() {
         </div>
       )}
 
-      {/* ==================== PASO 2: REGISTRO DINÁMICO DE INGESTA ==================== */}
+      {/* ==================== ETAPA 2: REGISTRO DINÁMICO DE INGESTA ==================== */}
       {currentStep === 2 && (
-        <div className="space-y-6 max-w-5xl mx-auto px-4">
+        <div className="space-y-6">
           {/* Gráfico y Balance Energético en Tiempo Real */}
           <RealTimeBalance />
 
@@ -62,13 +67,13 @@ export default function EvaluationDashboard() {
           <FoodSearch />
 
           {/* Lista de Alimentos Registrados en la Comida Seleccionada y en el Día */}
-          <div className="space-y-4">
+          <div className="bg-white dark:bg-[#1c1c1e] rounded-3xl p-6 border border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white capitalize">
+                <h3 className="text-sm font-bold text-zinc-900 dark:text-white capitalize">
                   Alimentos en {selectedMeal} ({entriesInActiveMeal.length})
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">
                   Total del día acumulado: {foodEntries.length} alimentos
                 </p>
               </div>
@@ -77,7 +82,7 @@ export default function EvaluationDashboard() {
                 <button
                   type="button"
                   onClick={clearFoodEntries}
-                  className="text-xs font-semibold text-rose-500 hover:text-rose-700"
+                  className="text-xs font-semibold text-rose-500 hover:text-rose-600 apple-btn"
                 >
                   Vaciar todo el día
                 </button>
@@ -85,10 +90,10 @@ export default function EvaluationDashboard() {
             </div>
 
             {entriesInActiveMeal.length === 0 ? (
-              <div className="p-8 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800 text-center text-slate-400 text-xs">
-                <Utensils className="w-6 h-6 mx-auto mb-2 opacity-40 text-emerald-500" />
+              <div className="p-8 rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-800 text-center text-zinc-400 text-xs">
+                <Utensils className="w-6 h-6 mx-auto mb-2 opacity-30 text-[#30D158]" />
                 <p>No has añadido alimentos para {selectedMeal}.</p>
-                <p className="text-[11px] text-slate-500 mt-0.5">
+                <p className="text-[11px] text-zinc-400 mt-0.5">
                   Usa el buscador de arriba para agregar porciones de referencia o medidas en plato.
                 </p>
               </div>
@@ -101,32 +106,32 @@ export default function EvaluationDashboard() {
             )}
           </div>
 
-          {/* Navegación entre Pasos */}
-          <div className="pt-4 flex items-center justify-between border-t border-slate-200 dark:border-slate-800">
+          {/* Navegación entre Etapas */}
+          <div className="pt-2 flex items-center justify-between">
             <button
               type="button"
               onClick={() => setCurrentStep(1)}
-              className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 flex items-center gap-1.5"
+              className="px-4 py-2.5 rounded-xl text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white flex items-center gap-1.5 apple-btn"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>← Volver al Perfil & GETD</span>
+              <span>← Volver a Gasto & METs</span>
             </button>
 
             <button
               type="button"
               onClick={() => setCurrentStep(3)}
-              className="px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold shadow transition flex items-center gap-1.5"
+              className="px-5 py-2.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-bold shadow-sm transition flex items-center gap-1.5 apple-btn"
             >
-              <span>Ajustar Intercambios (Paso 3)</span>
+              <span>Ajustar Intercambios (Etapa 3)</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </div>
       )}
 
-      {/* ==================== PASO 3: MOTOR DE INTERCAMBIOS ==================== */}
+      {/* ==================== ETAPA 3: MOTOR DE INTERCAMBIOS ==================== */}
       {currentStep === 3 && (
-        <div className="max-w-5xl mx-auto px-4">
+        <div>
           <ExchangeStepView />
         </div>
       )}
@@ -138,4 +143,3 @@ export default function EvaluationDashboard() {
     </div>
   );
 }
-

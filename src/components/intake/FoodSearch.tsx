@@ -5,7 +5,7 @@ import { useNutrition } from '../../context/NutritionContext';
 import { Food } from '../../types';
 import PlatePortionPicker from './PlatePortionPicker';
 import CustomFoodModal from '../foods/CustomFoodModal';
-import { Search, Plus, Check, Sparkles } from 'lucide-react';
+import { Search, Plus, Check, Utensils } from 'lucide-react';
 
 export default function FoodSearch() {
   const { availableFoods, addFoodEntry, selectedMeal } = useNutrition();
@@ -52,26 +52,27 @@ export default function FoodSearch() {
 
   return (
     <>
-      <div className="bg-white dark:bg-slate-900 rounded-3xl border border-stone-200/80 dark:border-slate-800 p-6 sm:p-7 shadow-sm">
+      <div className="bg-white dark:bg-[#1c1c1e] rounded-3xl p-6 sm:p-7 border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs font-bold mb-1.5">
-              <Sparkles className="w-3.5 h-3.5" /> Agregando a {selectedMeal}
-            </div>
-            <h3 className="text-xl font-black text-stone-900 dark:text-white">
-              ¿Qué alimento ponemos en su plato?
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#30D158] flex items-center gap-1.5">
+              <Utensils className="w-3.5 h-3.5" />
+              <span>Registro de Ingesta: {selectedMeal}</span>
+            </span>
+            <h3 className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight mt-0.5">
+              Buscador de Alimentos & Porciones
             </h3>
-            <p className="text-xs text-stone-500 dark:text-slate-400 font-medium">
-              Escribe o selecciona de la lista con medidas prácticas.
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">
+              Selecciona o busca un alimento para añadirlo con gramaje o medidas visuales en plato.
             </p>
           </div>
 
           <button
             type="button"
             onClick={() => setIsCustomModalOpen(true)}
-            className="px-4 py-2 rounded-xl bg-purple-100 hover:bg-purple-200 dark:bg-purple-950 dark:hover:bg-purple-900 text-purple-800 dark:text-purple-300 text-xs font-black transition bouncy-hover flex items-center gap-1.5 self-start sm:self-auto"
+            className="px-3.5 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-semibold transition apple-btn flex items-center gap-1.5 self-start sm:self-auto"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-4 h-4 text-[#30D158]" />
             <span>Crear Alimento Propio</span>
           </button>
         </div>
@@ -79,35 +80,35 @@ export default function FoodSearch() {
         {/* Buscador */}
         <div className="space-y-3 mb-4">
           <div className="relative">
-            <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-3.5 pointer-events-none" />
+            <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-3.5 pointer-events-none" />
             <input
               type="text"
               placeholder="Buscar comida (ej. pollo, arroz, huevo, aguacate, avena)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-stone-50 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700 rounded-2xl text-sm font-semibold text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-400"
+              className="w-full pl-10 pr-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/80 border border-zinc-200/80 dark:border-zinc-700 rounded-xl text-xs sm:text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#30D158]"
             />
           </div>
 
-          {/* Chips de Categorías con Emojis */}
+          {/* Chips de Categorías */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
             {[
-              { id: 'todas', label: 'Todos ✨' },
-              { id: 'proteina', label: 'Proteínas 🍗' },
-              { id: 'carbohidrato', label: 'Carbohidratos 🍚' },
-              { id: 'grasa', label: 'Grasas 🥑' },
-              { id: 'verdura', label: 'Vegetales 🥦' },
-              { id: 'fruta', label: 'Frutas 🍎' },
-              { id: 'lacteo', label: 'Lácteos 🥛' },
+              { id: 'todas', label: 'Todos' },
+              { id: 'proteina', label: 'Proteínas' },
+              { id: 'carbohidrato', label: 'Carbohidratos' },
+              { id: 'grasa', label: 'Grasas' },
+              { id: 'verdura', label: 'Vegetales' },
+              { id: 'fruta', label: 'Frutas' },
+              { id: 'lacteo', label: 'Lácteos' },
             ].map((cat) => (
               <button
                 key={cat.id}
                 type="button"
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`text-xs px-3.5 py-1.5 rounded-xl font-bold whitespace-nowrap transition-all bouncy-hover ${
+                className={`text-xs px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-all apple-btn ${
                   selectedCategory === cat.id
-                    ? 'bg-stone-900 text-white dark:bg-white dark:text-stone-900 shadow-sm'
-                    : 'bg-stone-100 dark:bg-slate-800 text-stone-600 dark:text-slate-400 hover:text-stone-900'
+                    ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-sm'
+                    : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
                 {cat.label}
@@ -125,30 +126,30 @@ export default function FoodSearch() {
                 key={food.id}
                 type="button"
                 onClick={() => handleSelectFood(food)}
-                className={`w-full text-left p-3 rounded-2xl border transition-all flex items-center justify-between bouncy-hover ${
+                className={`w-full text-left p-3 rounded-2xl border transition-all flex items-center justify-between apple-btn ${
                   isSelected
-                    ? 'border-emerald-400 bg-emerald-50/70 dark:bg-emerald-950/40 ring-2 ring-emerald-400 shadow-sm'
-                    : 'border-stone-100 dark:border-slate-800 hover:bg-stone-50 dark:hover:bg-slate-800/40'
+                    ? 'border-[#30D158] bg-[#30D158]/5 dark:bg-[#30D158]/10 shadow-sm'
+                    : 'border-zinc-100 dark:border-zinc-800/80 hover:bg-zinc-50 dark:hover:bg-zinc-800/40'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">{food.emoji || '🍽️'}</span>
+                  <span className="text-xl">{food.emoji || '🍽️'}</span>
                   <div>
-                    <p className="text-xs sm:text-sm font-black text-stone-900 dark:text-white flex items-center gap-1.5">
+                    <p className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-white flex items-center gap-1.5">
                       <span>{food.name}</span>
                       {food.isCustom && (
-                        <span className="text-[10px] px-2 py-0.2 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300 font-extrabold">
-                          Propio ✨
+                        <span className="text-[10px] px-2 py-0.2 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300 font-semibold">
+                          Propio
                         </span>
                       )}
                     </p>
-                    <p className="text-[11px] font-semibold text-stone-500 dark:text-slate-400 capitalize">
+                    <p className="text-[11px] text-zinc-500 dark:text-zinc-400 capitalize">
                       {food.category} • {food.caloriesPer100g} kcal por cada 100g
                     </p>
                   </div>
                 </div>
 
-                <div className="text-right text-xs font-bold text-stone-600 dark:text-slate-300 hidden sm:block">
+                <div className="text-right text-xs font-semibold text-zinc-500 dark:text-zinc-400 hidden sm:block">
                   P: {food.proteinPer100g}g • C: {food.carbsPer100g}g • G: {food.fatPer100g}g
                 </div>
               </button>
@@ -158,21 +159,21 @@ export default function FoodSearch() {
 
         {/* Configuración de Porción y Botón Agregar */}
         {selectedFood && (
-          <div className="pt-4 border-t border-stone-100 dark:border-slate-800 bg-stone-50/80 dark:bg-slate-800/40 p-5 rounded-3xl space-y-4">
+          <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/40 p-5 rounded-2xl space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <span className="text-3xl">{selectedFood.emoji || '🍽️'}</span>
+                <span className="text-2xl">{selectedFood.emoji || '🍽️'}</span>
                 <div>
-                  <h4 className="text-sm font-black text-stone-900 dark:text-white">
+                  <h4 className="text-sm font-bold text-zinc-900 dark:text-white">
                     {selectedFood.name}
                   </h4>
                   <div className="flex items-center gap-3 text-xs mt-0.5">
-                    <span className="font-black text-emerald-700 dark:text-emerald-400">
-                      🔥 {previewKcal} kcal
+                    <span className="font-bold text-[#30D158]">
+                      {previewKcal} kcal
                     </span>
-                    <span className="font-bold text-purple-600">P: {previewP}g</span>
-                    <span className="font-bold text-amber-600">C: {previewC}g</span>
-                    <span className="font-bold text-pink-600">G: {previewF}g</span>
+                    <span className="text-zinc-500">P: {previewP}g</span>
+                    <span className="text-zinc-500">C: {previewC}g</span>
+                    <span className="text-zinc-500">G: {previewF}g</span>
                   </div>
                 </div>
               </div>
@@ -190,18 +191,18 @@ export default function FoodSearch() {
                       setGrams(val);
                       setPortionLabel(`${val}g`);
                     }}
-                    className="w-full px-3 py-2 text-center bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-700 rounded-xl text-xs font-black text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    className="w-full px-3 py-2 text-center bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-bold text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#30D158]"
                   />
-                  <span className="absolute right-2.5 top-2 text-[10px] text-stone-400 font-bold">g</span>
+                  <span className="absolute right-2.5 top-2 text-[10px] text-zinc-400">g</span>
                 </div>
 
                 <button
                   type="button"
                   onClick={handleAdd}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black shadow-md shadow-emerald-600/20 transition bouncy-hover"
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#30D158] hover:bg-[#28b84d] text-white text-xs font-bold shadow-sm transition apple-btn"
                 >
                   {addedSuccess ? <Check className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
-                  <span>{addedSuccess ? '¡En el Plato! 🎉' : '+ Servir en el Plato'}</span>
+                  <span>{addedSuccess ? 'Añadido' : '+ Agregar al Plato'}</span>
                 </button>
               </div>
             </div>

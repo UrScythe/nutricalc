@@ -18,7 +18,7 @@ import {
   GETDResult,
   IntakeTotals,
 } from '../lib/calculations';
-import { getStoredFoods, saveFood as persistFood, resetFoodsToDefault } from '../services/dataService';
+import { getStoredFoods, saveFood as persistFood, deleteFood as removeStoredFood, resetFoodsToDefault } from '../services/dataService';
 import { usePatient } from './PatientContext';
 
 interface NutritionContextType {
@@ -60,6 +60,7 @@ interface NutritionContextType {
   // Catálogo de alimentos (propios + predeterminados)
   availableFoods: Food[];
   addCustomFood: (newFood: Food) => void;
+  deleteCustomFood: (foodId: string) => void;
   resetFoods: () => void;
 
   // Guardado en historial
@@ -331,6 +332,11 @@ export function NutritionProvider({ children }: { children: ReactNode }) {
     setAvailableFoods(updated);
   };
 
+  const deleteCustomFood = (foodId: string) => {
+    const updated = removeStoredFood(foodId);
+    setAvailableFoods(updated);
+  };
+
   const resetFoods = () => {
     const defaults = resetFoodsToDefault();
     setAvailableFoods(defaults);
@@ -403,6 +409,7 @@ export function NutritionProvider({ children }: { children: ReactNode }) {
         applyExchange,
         availableFoods,
         addCustomFood,
+        deleteCustomFood,
         resetFoods,
         saveCurrentAsConsultation,
         loadConsultationIntoSession,

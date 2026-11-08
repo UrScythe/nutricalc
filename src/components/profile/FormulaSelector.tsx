@@ -4,14 +4,13 @@ import React from 'react';
 import { useNutrition } from '../../context/NutritionContext';
 import { TMBFormula } from '../../types';
 import { calculateTMB } from '../../lib/calculations';
-import { Flame, CheckCircle, Info } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, Flame } from 'lucide-react';
 
 export default function FormulaSelector() {
   const { biometrics, updateBiometricsField } = useNutrition();
 
   const formulas: {
     id: TMBFormula;
-    emoji: string;
     name: string;
     badge: string;
     description: string;
@@ -19,38 +18,39 @@ export default function FormulaSelector() {
   }[] = [
     {
       id: 'mifflin',
-      emoji: '⭐',
       name: 'Mifflin-St Jeor',
-      badge: 'Recomendada por la Academia',
-      description: 'La fórmula más exacta y validada para adultos en la actualidad.',
+      badge: 'Estándar Clínico Recomendado',
+      description: 'Ecuación con mayor precisión y respaldo para adultos en la actualidad.',
       requiresFat: false,
     },
     {
       id: 'harris',
-      emoji: '📜',
       name: 'Harris-Benedict',
-      badge: 'Revisada (1984)',
-      description: 'Ecuación clásica ajustada según la estatura y edad.',
+      badge: 'Ecuación Revisada (1984)',
+      description: 'Fórmula clásica ajustada con peso, talla y edad.',
       requiresFat: false,
     },
     {
       id: 'katch',
-      emoji: '🏋️',
       name: 'Katch-McArdle',
-      badge: 'Masa Muscular Magra',
-      description: 'Especial para atletas; quema más calorías por kilo de músculo.',
+      badge: 'Basada en Masa Magra',
+      description: 'Óptima para deportistas de alto rendimiento con dato de pliegues/% grasa.',
       requiresFat: true,
     },
   ];
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-3xl border border-stone-200/80 dark:border-slate-800 p-6 sm:p-7 shadow-sm">
+    <div className="bg-white dark:bg-[#1c1c1e] rounded-3xl p-6 sm:p-7 border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
       <div className="mb-5">
-        <h3 className="text-base font-black text-stone-900 dark:text-white flex items-center gap-2">
-          <span>Elige la fórmula de Tasa Metabólica Basal (TMB)</span>
+        <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF2D55] flex items-center gap-1.5">
+          <Flame className="w-3.5 h-3.5" />
+          <span>Metabolismo Basal</span>
+        </span>
+        <h3 className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight mt-0.5">
+          Ecuación para Tasa Metabólica Basal (TMB)
         </h3>
-        <p className="text-xs text-stone-500 dark:text-slate-400 font-medium mt-0.5">
-          Calcula cuánta energía consume su cuerpo solo para mantenerse vivo en reposo.
+        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+          Determina la energía mínima requerida por el organismo en reposo absoluto.
         </p>
       </div>
 
@@ -70,44 +70,45 @@ export default function FormulaSelector() {
               type="button"
               disabled={isDisabled}
               onClick={() => updateBiometricsField('formula', f.id)}
-              className={`p-5 rounded-2xl border text-left transition-all bouncy-hover relative flex flex-col justify-between ${
+              className={`p-4 rounded-2xl border text-left transition-all apple-btn relative flex flex-col justify-between ${
                 isSelected
-                  ? 'border-emerald-400 bg-emerald-50/70 dark:bg-emerald-950/30 ring-2 ring-emerald-400 shadow-md'
+                  ? 'border-[#FF2D55] bg-[#FF2D55]/5 dark:bg-[#FF2D55]/10 shadow-sm'
                   : isDisabled
-                  ? 'border-stone-200 dark:border-slate-800 bg-stone-50/50 dark:bg-slate-800/30 opacity-60 cursor-not-allowed'
-                  : 'border-stone-200/80 dark:border-slate-800 hover:border-emerald-200 bg-white dark:bg-slate-900'
+                  ? 'border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/30 opacity-60 cursor-not-allowed'
+                  : 'border-zinc-200/80 dark:border-zinc-800 hover:border-zinc-300 bg-zinc-50/50 dark:bg-zinc-900'
               }`}
             >
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-2xl">{f.emoji}</span>
+                <div className="flex items-center justify-between gap-1 mb-2">
                   <span
-                    className={`text-xs px-3 py-1 rounded-full font-black ${
+                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                       isSelected
-                        ? 'bg-emerald-500 text-white shadow-sm'
-                        : 'bg-stone-100 dark:bg-slate-800 text-stone-800 dark:text-slate-200'
+                        ? 'bg-[#FF2D55] text-white'
+                        : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300'
                     }`}
                   >
-                    {simulatedTMB} kcal
+                    {f.badge}
                   </span>
+                  {isSelected && (
+                    <CheckCircle2 className="w-4 h-4 text-[#FF2D55]" />
+                  )}
                 </div>
 
-                <p className="font-extrabold text-sm text-stone-900 dark:text-white mb-1">
+                <h4 className="text-sm font-bold text-zinc-900 dark:text-white">
                   {f.name}
-                </p>
-                <p className="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 mb-2">
-                  {f.badge}
-                </p>
-                <p className="text-xs text-stone-500 dark:text-slate-400 leading-relaxed">
+                </h4>
+
+                <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">
                   {f.description}
                 </p>
               </div>
 
-              {isDisabled && (
-                <div className="mt-3 text-[11px] text-amber-600 dark:text-amber-400 font-bold flex items-center gap-1">
-                  <Info className="w-3.5 h-3.5" /> Ingresa % de grasa arriba
-                </div>
-              )}
+              <div className="mt-4 pt-3 border-t border-zinc-200/60 dark:border-zinc-800 flex items-center justify-between">
+                <span className="text-[11px] text-zinc-400">TMB estimada:</span>
+                <span className="text-sm font-bold text-zinc-900 dark:text-white">
+                  {simulatedTMB} <span className="text-xs font-normal text-zinc-400">kcal/día</span>
+                </span>
+              </div>
             </button>
           );
         })}

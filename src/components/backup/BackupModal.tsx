@@ -52,46 +52,46 @@ export default function BackupModal({ onClose }: BackupModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden">
-        <div className="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="p-2 rounded-xl bg-teal-50 dark:bg-teal-950/40 text-teal-600 dark:text-teal-400">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-md animate-fade-in">
+      <div className="bg-white dark:bg-[#1c1c1e] border border-zinc-200/80 dark:border-zinc-800 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden">
+        <div className="px-6 py-5 border-b border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-[#0A84FF]/10 text-[#0A84FF] flex items-center justify-center">
               <Cloud className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                Copias de Seguridad & Plan Cloud
+              <h3 className="text-base font-bold text-zinc-900 dark:text-white">
+                Copias de Seguridad & Nube
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Respaldo de expedientes, historial de consultas y alimentos
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                Respaldo de expedientes clínicos, consultas y catálogo
               </p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+            className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-400 hover:text-zinc-900 dark:hover:text-white flex items-center justify-center transition apple-btn"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="p-5 space-y-4">
+        <div className="p-6 space-y-4">
           {/* Exportar */}
-          <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex items-center justify-between gap-3">
+          <div className="p-4 rounded-2xl border border-zinc-200/70 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-800/30 flex items-center justify-between gap-3">
             <div>
-              <p className="text-xs font-bold text-slate-900 dark:text-white">
+              <p className="text-xs font-bold text-zinc-900 dark:text-white">
                 Descargar Respaldo Completo (JSON)
               </p>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                Guarda todos tus pacientes, citas registradas y alimentos propios en un archivo seguro en tu equipo.
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-relaxed">
+                Guarda todos tus pacientes, consultas y alimentos personalizados en tu equipo de forma segura.
               </p>
             </div>
             <button
               type="button"
               onClick={handleDownload}
-              className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5 shrink-0"
+              className="px-3.5 py-2 rounded-xl bg-[#0071e3] hover:bg-[#0077ED] text-white text-xs font-bold shadow-sm transition flex items-center gap-1.5 shrink-0 apple-btn"
             >
               <Download className="w-4 h-4" />
               <span>Exportar</span>
@@ -99,16 +99,16 @@ export default function BackupModal({ onClose }: BackupModalProps) {
           </div>
 
           {/* Importar */}
-          <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex items-center justify-between gap-3">
+          <div className="p-4 rounded-2xl border border-zinc-200/70 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-800/30 flex items-center justify-between gap-3">
             <div>
-              <p className="text-xs font-bold text-slate-900 dark:text-white">
+              <p className="text-xs font-bold text-zinc-900 dark:text-white">
                 Restaurar Respaldo
               </p>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
-                Carga un archivo JSON previo para recuperar todos tus datos en cualquier computador o navegador.
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5 leading-relaxed">
+                Carga un archivo JSON previo para transferir tus datos entre dispositivos.
               </p>
             </div>
-            <label className="px-3.5 py-2 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 text-xs font-bold transition flex items-center gap-1.5 shrink-0 cursor-pointer">
+            <label className="px-3.5 py-2 rounded-xl bg-zinc-200/80 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-800 dark:text-zinc-200 text-xs font-bold transition flex items-center gap-1.5 shrink-0 cursor-pointer apple-btn">
               <Upload className="w-4 h-4" />
               <span>Importar</span>
               <input
@@ -121,41 +121,41 @@ export default function BackupModal({ onClose }: BackupModalProps) {
           </div>
 
           {importStatus === 'success' && (
-            <div className="p-3 rounded-xl bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 text-xs font-semibold flex items-center gap-2">
+            <div className="p-3.5 rounded-2xl bg-[#30D158]/15 border border-[#30D158]/20 text-[#30D158] text-xs font-semibold flex items-center gap-2">
               <Check className="w-4 h-4" />
-              <span>¡Datos restaurados con éxito! Recargando aplicación...</span>
+              <span>Datos restaurados con éxito. Recargando aplicación...</span>
             </div>
           )}
 
           {importStatus === 'error' && (
-            <div className="p-3 rounded-xl bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300 text-xs font-semibold flex items-center gap-2">
+            <div className="p-3.5 rounded-2xl bg-[#FF2D55]/15 border border-[#FF2D55]/20 text-[#FF2D55] text-xs font-semibold flex items-center gap-2">
               <AlertCircle className="w-4 h-4" />
               <span>{errorMessage}</span>
             </div>
           )}
 
-          {/* Plan de Despliegue en la Red & Futura Base de Datos */}
-          <div className="p-4 rounded-xl border border-teal-200 dark:border-teal-900/60 bg-teal-50/50 dark:bg-teal-950/20 text-xs space-y-2">
-            <div className="flex items-center gap-1.5 font-bold text-teal-900 dark:text-teal-300">
-              <ShieldCheck className="w-4 h-4 text-teal-600" />
-              <span>Plan para Subir a la Red & Base de Datos Remota:</span>
+          {/* Plan de Despliegue en la Red */}
+          <div className="p-4 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/20 text-xs space-y-2">
+            <div className="flex items-center gap-1.5 font-bold text-zinc-900 dark:text-zinc-200">
+              <ShieldCheck className="w-4 h-4 text-[#0071e3]" />
+              <span>Despliegue Cloud & Base de Datos:</span>
             </div>
-            <ol className="list-decimal pl-4 space-y-1 text-slate-600 dark:text-slate-400 text-[11px]">
+            <ol className="list-decimal pl-4 space-y-1 text-zinc-600 dark:text-zinc-400 text-[11px] leading-relaxed">
               <li>
-                <strong>Despliegue Web inmediato:</strong> Esta aplicación está construida sobre Next.js 14 pura. Puedes subirla hoy mismo a <strong>Vercel o Netlify</strong> gratis y usarla desde tu celular o consultorio con tu propio dominio.
+                <strong>Vercel / Netlify:</strong> Compilación estática optimizada para desplegar inmediatamente gratis.
               </li>
               <li>
-                <strong>Capa Desacoplada:</strong> Todo el almacenamiento pasa por <code>src/services/dataService.ts</code>. Para conectar una base de datos en la nube (como <strong>Supabase / PostgreSQL</strong>), solo se configuran las variables de entorno en Vercel sin modificar tus interfaces ni cálculos.
+                <strong>Capa de Datos:</strong> Desacoplada a través del repositorio en <code>dataService.ts</code> para migrar a PostgreSQL / Supabase cuando lo requieras.
               </li>
             </ol>
           </div>
         </div>
 
-        <div className="px-5 py-3 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 flex justify-end">
+        <div className="px-6 py-4 bg-zinc-50 dark:bg-zinc-800/40 border-t border-zinc-100 dark:border-zinc-800 flex justify-end">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:opacity-90"
+            className="px-4 py-2 text-xs font-semibold rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:opacity-90 apple-btn"
           >
             Cerrar
           </button>
@@ -164,4 +164,3 @@ export default function BackupModal({ onClose }: BackupModalProps) {
     </div>
   );
 }
-
