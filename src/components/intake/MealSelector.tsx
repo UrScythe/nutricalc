@@ -3,22 +3,20 @@
 import React from 'react';
 import { useNutrition } from '../../context/NutritionContext';
 import { MealType } from '../../types';
-import { Coffee, Sun, Sunset, Cookie } from 'lucide-react';
 
 export default function MealSelector() {
   const { selectedMeal, setSelectedMeal, foodEntries } = useNutrition();
 
-  const meals: { id: MealType; label: string; icon: any; color: string }[] = [
-    { id: 'desayuno', label: 'Desayuno', icon: Coffee, color: 'text-amber-500' },
-    { id: 'almuerzo', label: 'Almuerzo', icon: Sun, color: 'text-orange-500' },
-    { id: 'cena', label: 'Cena', icon: Sunset, color: 'text-indigo-500' },
-    { id: 'snack', label: 'Snacks / Peri-entreno', icon: Cookie, color: 'text-emerald-500' },
+  const meals: { id: MealType; label: string; emoji: string; color: string }[] = [
+    { id: 'desayuno', label: 'Desayuno', emoji: '☕', color: 'from-amber-400 to-orange-400' },
+    { id: 'almuerzo', label: 'Almuerzo', emoji: '🥗', color: 'from-emerald-400 to-teal-400' },
+    { id: 'cena', label: 'Cena', emoji: '🌙', color: 'from-indigo-400 to-purple-400' },
+    { id: 'snack', label: 'Snacks & Merienda', emoji: '🥑', color: 'from-pink-400 to-rose-400' },
   ];
 
   return (
-    <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
       {meals.map((m) => {
-        const Icon = m.icon;
         const isSelected = selectedMeal === m.id;
         const count = foodEntries.filter((e) => e.meal === m.id).length;
 
@@ -27,22 +25,32 @@ export default function MealSelector() {
             key={m.id}
             type="button"
             onClick={() => setSelectedMeal(m.id)}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+            className={`p-3.5 rounded-2xl border text-left transition-all bouncy-hover relative flex items-center justify-between ${
               isSelected
-                ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-md'
-                : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
+                ? 'border-emerald-400 bg-emerald-50/70 dark:bg-emerald-950/30 ring-2 ring-emerald-400 shadow-sm'
+                : 'border-stone-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-stone-50'
             }`}
           >
-            <Icon className={`w-4 h-4 ${isSelected ? 'text-emerald-400' : m.color}`} />
-            <span>{m.label}</span>
+            <div className="flex items-center gap-2.5">
+              <span className="text-2xl">{m.emoji}</span>
+              <div>
+                <p
+                  className={`text-xs sm:text-sm font-black ${
+                    isSelected
+                      ? 'text-emerald-900 dark:text-emerald-300'
+                      : 'text-stone-800 dark:text-slate-200'
+                  }`}
+                >
+                  {m.label}
+                </p>
+                <p className="text-[11px] text-stone-500 dark:text-slate-400 font-semibold">
+                  {count === 0 ? 'Sin alimentos' : `${count} en el plato`}
+                </p>
+              </div>
+            </div>
+
             {count > 0 && (
-              <span
-                className={`text-[11px] px-1.5 py-0.2 rounded-full font-bold ${
-                  isSelected
-                    ? 'bg-slate-700 text-white dark:bg-slate-200 dark:text-slate-900'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
-                }`}
-              >
+              <span className="w-5 h-5 rounded-full bg-emerald-500 text-white text-[10px] font-black flex items-center justify-center shadow-sm">
                 {count}
               </span>
             )}
@@ -52,4 +60,3 @@ export default function MealSelector() {
     </div>
   );
 }
-

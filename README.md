@@ -34,3 +34,4 @@ Aplicación web moderna y ultra-intuitiva diseñada para nutricionistas clínico
 - **Tailwind CSS**
 - **Lucide React**
 - **Almacenamiento Local Persistente & Cloud-Ready**
+

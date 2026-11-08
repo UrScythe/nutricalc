@@ -30,6 +30,7 @@ export interface VisualPortion {
 export interface Food {
   id: string;
   name: string;
+  emoji?: string;
   category: FoodCategory;
   isCustom?: boolean;      // Creado por el nutricionista
   caloriesPer100g: number;
@@ -43,6 +44,7 @@ export interface Food {
 export interface Activity {
   id: string;
   name: string;
+  emoji?: string;
   category: string;
   met: number;
   description?: string;

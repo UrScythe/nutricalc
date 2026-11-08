@@ -1,4 +1,4 @@
-// Base de Datos Semilla de Alimentos con Porciones Visuales ("En un plato")
+// Base de Datos Semilla de Alimentos con Emojis y Porciones Visuales ("En un plato")
 import { Food } from '../types';
 
 export const DEFAULT_FOODS: Food[] = [
@@ -6,6 +6,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_p01',
     name: 'Pechuga de pollo a la plancha',
+    emoji: '🍗',
     category: 'proteina',
     caloriesPer100g: 165,
     proteinPer100g: 31.0,
@@ -19,7 +20,8 @@ export const DEFAULT_FOODS: Food[] = [
   },
   {
     id: 'food_p02',
-    name: 'Carne de res magra (lomo / cuadril)',
+    name: 'Carne de res magra (lomo)',
+    emoji: '🥩',
     category: 'proteina',
     caloriesPer100g: 210,
     proteinPer100g: 26.0,
@@ -32,7 +34,8 @@ export const DEFAULT_FOODS: Food[] = [
   },
   {
     id: 'food_p03',
-    name: 'Filete de pescado blanco (Tilapia / Merluza)',
+    name: 'Filete de pescado blanco (Tilapia)',
+    emoji: '🐟',
     category: 'proteina',
     caloriesPer100g: 96,
     proteinPer100g: 20.1,
@@ -46,6 +49,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_p04',
     name: 'Huevo de gallina entero',
+    emoji: '🥚',
     category: 'proteina',
     caloriesPer100g: 155,
     proteinPer100g: 13.0,
@@ -60,6 +64,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_p05',
     name: 'Clara de huevo',
+    emoji: '🍳',
     category: 'proteina',
     caloriesPer100g: 52,
     proteinPer100g: 11.0,
@@ -73,6 +78,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_p06',
     name: 'Atún al agua en conserva',
+    emoji: '🥫',
     category: 'proteina',
     caloriesPer100g: 116,
     proteinPer100g: 25.5,
@@ -86,6 +92,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_p07',
     name: 'Lomo de cerdo magro',
+    emoji: '🍖',
     category: 'proteina',
     caloriesPer100g: 143,
     proteinPer100g: 26.0,
@@ -98,6 +105,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_p08',
     name: 'Tofu firme',
+    emoji: '🧈',
     category: 'proteina',
     caloriesPer100g: 76,
     proteinPer100g: 8.1,
@@ -111,6 +119,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_p09',
     name: 'Frijoles negros cocidos',
+    emoji: '🫘',
     category: 'proteina',
     caloriesPer100g: 132,
     proteinPer100g: 8.9,
@@ -124,6 +133,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_p10',
     name: 'Lentejas cocidas',
+    emoji: '🍲',
     category: 'proteina',
     caloriesPer100g: 116,
     proteinPer100g: 9.0,
@@ -139,6 +149,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_c01',
     name: 'Arroz blanco cocido',
+    emoji: '🍚',
     category: 'carbohidrato',
     caloriesPer100g: 130,
     proteinPer100g: 2.7,
@@ -152,7 +163,8 @@ export const DEFAULT_FOODS: Food[] = [
   },
   {
     id: 'food_c02',
-    name: 'Papa / Patata cocida o hervida',
+    name: 'Papa / Patata cocida',
+    emoji: '🥔',
     category: 'carbohidrato',
     caloriesPer100g: 87,
     proteinPer100g: 2.0,
@@ -165,7 +177,8 @@ export const DEFAULT_FOODS: Food[] = [
   },
   {
     id: 'food_c03',
-    name: 'Avena en hojuelas (seca)',
+    name: 'Avena en hojuelas',
+    emoji: '🥣',
     category: 'carbohidrato',
     caloriesPer100g: 389,
     proteinPer100g: 16.9,
@@ -180,6 +193,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_c04',
     name: 'Pasta / Espaguetis cocidos',
+    emoji: '🍝',
     category: 'carbohidrato',
     caloriesPer100g: 131,
     proteinPer100g: 5.0,
@@ -192,7 +206,8 @@ export const DEFAULT_FOODS: Food[] = [
   },
   {
     id: 'food_c05',
-    name: 'Camote / Batata / Boniato cocido',
+    name: 'Camote / Batata asada',
+    emoji: '🍠',
     category: 'carbohidrato',
     caloriesPer100g: 86,
     proteinPer100g: 1.6,
@@ -206,6 +221,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_c06',
     name: 'Pan integral / de molde',
+    emoji: '🍞',
     category: 'carbohidrato',
     caloriesPer100g: 250,
     proteinPer100g: 9.5,
@@ -219,20 +235,21 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_c07',
     name: 'Tortilla de maíz nixtamalizado',
+    emoji: '🫓',
     category: 'carbohidrato',
     caloriesPer100g: 218,
     proteinPer100g: 5.7,
     carbsPer100g: 44.6,
     fatPer100g: 2.8,
     visualPortions: [
-      { id: 'vp_c07_1', label: '1 Tortilla mediana', type: 'unit', approxGrams: 30, description: '1 pieza taco/acompañamiento (~65 kcal, 13g C)' },
+      { id: 'vp_c07_1', label: '1 Tortilla mediana', type: 'unit', approxGrams: 30, description: '1 pieza taco (~65 kcal, 13g C)' },
       { id: 'vp_c07_2', label: '2 Tortillas', type: 'unit', approxGrams: 60, description: '2 piezas (~130 kcal, 26g C)' },
-      { id: 'vp_c07_3', label: '3 Tortillas', type: 'unit', approxGrams: 90, description: '3 piezas (~196 kcal, 40g C)' },
     ],
   },
   {
     id: 'food_c08',
     name: 'Yuca / Mandioca cocida',
+    emoji: '🌾',
     category: 'carbohidrato',
     caloriesPer100g: 160,
     proteinPer100g: 1.4,
@@ -240,12 +257,12 @@ export const DEFAULT_FOODS: Food[] = [
     fatPer100g: 0.3,
     visualPortions: [
       { id: 'vp_c08_1', label: '1 Trozo mediano (1/2 puño)', type: 'fist', approxGrams: 100, description: 'Trozo cocido sin aceite (~160 kcal, 38g C)' },
-      { id: 'vp_c08_2', label: '1/4 de plato', type: 'plate_quarter', approxGrams: 130, description: 'Guarnición típica (~208 kcal, 49g C)' },
     ],
   },
   {
     id: 'food_c09',
-    name: 'Plátano verde o maduro cocido',
+    name: 'Plátano verde cocido',
+    emoji: '🍌',
     category: 'carbohidrato',
     caloriesPer100g: 122,
     proteinPer100g: 1.3,
@@ -253,20 +270,19 @@ export const DEFAULT_FOODS: Food[] = [
     fatPer100g: 0.4,
     visualPortions: [
       { id: 'vp_c09_1', label: 'Medio plátano cocido', type: 'unit', approxGrams: 100, description: 'Media unidad (~122 kcal, 32g C)' },
-      { id: 'vp_c09_2', label: '1 Plátano entero mediano', type: 'unit', approxGrams: 180, description: 'Pieza completa (~220 kcal, 57g C)' },
     ],
   },
   {
     id: 'food_c10',
     name: 'Quinoa cocida',
+    emoji: '🌾',
     category: 'carbohidrato',
     caloriesPer100g: 120,
     proteinPer100g: 4.4,
     carbsPer100g: 21.3,
     fatPer100g: 1.9,
     visualPortions: [
-      { id: 'vp_c10_1', label: '1/4 de plato', type: 'plate_quarter', approxGrams: 140, description: 'Pseudocereal completo (~168 kcal, 30g C)' },
-      { id: 'vp_c10_2', label: '1 Taza cocida', type: 'cup', approxGrams: 180, description: 'Porción entera (~216 kcal, 38g C)' },
+      { id: 'vp_c10_1', label: '1/4 de plato', type: 'plate_quarter', approxGrams: 140, description: 'Pseudocereal (~168 kcal, 30g C)' },
     ],
   },
 
@@ -274,6 +290,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_g01',
     name: 'Aguacate / Palta Hass',
+    emoji: '🥑',
     category: 'grasa',
     caloriesPer100g: 160,
     proteinPer100g: 2.0,
@@ -282,12 +299,12 @@ export const DEFAULT_FOODS: Food[] = [
     visualPortions: [
       { id: 'vp_g01_1', label: '1/4 de aguacate', type: 'unit', approxGrams: 40, description: '1 rebanada generosa (~64 kcal, 6g G)' },
       { id: 'vp_g01_2', label: '1/2 aguacate mediano', type: 'unit', approxGrams: 80, description: 'Mitad completa (~128 kcal, 12g G)' },
-      { id: 'vp_g01_3', label: '2 Cucharadas de puré/guacamole', type: 'tablespoon', approxGrams: 50, description: 'Untado en pan o ensalada (~80 kcal, 7g G)' },
     ],
   },
   {
     id: 'food_g02',
     name: 'Aceite de oliva extra virgen',
+    emoji: '🫒',
     category: 'grasa',
     caloriesPer100g: 884,
     proteinPer100g: 0.0,
@@ -295,38 +312,39 @@ export const DEFAULT_FOODS: Food[] = [
     fatPer100g: 100.0,
     visualPortions: [
       { id: 'vp_g02_1', label: '1 Cucharadita (postre)', type: 'teaspoon', approxGrams: 5, description: 'Aderezo ligero (~44 kcal, 5g G)' },
-      { id: 'vp_g02_2', label: '1 Cucharada sopera', type: 'tablespoon', approxGrams: 14, description: 'Cucharada completa para aderezar (~124 kcal, 14g G)' },
+      { id: 'vp_g02_2', label: '1 Cucharada sopera', type: 'tablespoon', approxGrams: 14, description: 'Cucharada completa (~124 kcal, 14g G)' },
     ],
   },
   {
     id: 'food_g03',
     name: 'Almendras naturales sin sal',
+    emoji: '🥜',
     category: 'grasa',
     caloriesPer100g: 579,
     proteinPer100g: 21.2,
     carbsPer100g: 21.6,
     fatPer100g: 49.9,
     visualPortions: [
-      { id: 'vp_g03_1', label: '1 Pulgar / Puñado pequeño (~12 u.)', type: 'thumb', approxGrams: 15, description: 'Snack controlado (~87 kcal, 7.5g G)' },
-      { id: 'vp_g03_2', label: '1 Puñado generoso (~24 u.)', type: 'fist', approxGrams: 30, description: 'Porción energética (~174 kcal, 15g G)' },
+      { id: 'vp_g03_1', label: '1 Pulgar / Puñado (~12 u.)', type: 'thumb', approxGrams: 15, description: 'Snack controlado (~87 kcal, 7.5g G)' },
     ],
   },
   {
     id: 'food_g04',
-    name: 'Mantequilla de maní / cacahuate 100%',
+    name: 'Mantequilla de maní 100%',
+    emoji: '🥜',
     category: 'grasa',
     caloriesPer100g: 588,
     proteinPer100g: 25.0,
     carbsPer100g: 20.0,
     fatPer100g: 50.0,
     visualPortions: [
-      { id: 'vp_g04_1', label: '1 Cucharadita colmada', type: 'teaspoon', approxGrams: 10, description: 'Para tostar (~59 kcal, 5g G)' },
-      { id: 'vp_g04_2', label: '1 Cucharada sopera rasa', type: 'tablespoon', approxGrams: 20, description: 'Porción clásica (~118 kcal, 10g G)' },
+      { id: 'vp_g04_1', label: '1 Cucharada sopera rasa', type: 'tablespoon', approxGrams: 20, description: 'Porción clásica (~118 kcal, 10g G)' },
     ],
   },
   {
     id: 'food_g05',
     name: 'Nueces de nogal',
+    emoji: '🌰',
     category: 'grasa',
     caloriesPer100g: 654,
     proteinPer100g: 15.2,
@@ -334,14 +352,14 @@ export const DEFAULT_FOODS: Food[] = [
     fatPer100g: 65.2,
     visualPortions: [
       { id: 'vp_g05_1', label: '4 Mitades de nuez (1 pulgar)', type: 'thumb', approxGrams: 15, description: 'Omega-3 diario (~98 kcal, 10g G)' },
-      { id: 'vp_g05_2', label: 'Puñado pequeño (~7 nueces)', type: 'fist', approxGrams: 28, description: 'Snack de frutos secos (~183 kcal, 18g G)' },
     ],
   },
 
   // ==================== VERDURAS / VEGETALES ====================
   {
     id: 'food_v01',
-    name: 'Brócoli al vapor o salteado',
+    name: 'Brócoli al vapor',
+    emoji: '🥦',
     category: 'verdura',
     caloriesPer100g: 34,
     proteinPer100g: 2.8,
@@ -349,38 +367,38 @@ export const DEFAULT_FOODS: Food[] = [
     fatPer100g: 0.4,
     visualPortions: [
       { id: 'vp_v01_1', label: '1/2 plato', type: 'plate_half', approxGrams: 180, description: 'Mitad vegetal generosa (~61 kcal, 5g P)' },
-      { id: 'vp_v01_2', label: '1 Taza en arbolitos', type: 'cup', approxGrams: 90, description: '1 taza (~31 kcal)' },
     ],
   },
   {
     id: 'food_v02',
-    name: 'Espinaca fresca cruda o cocida',
+    name: 'Espinaca fresca tierna',
+    emoji: '🥬',
     category: 'verdura',
     caloriesPer100g: 23,
     proteinPer100g: 2.9,
     carbsPer100g: 3.6,
     fatPer100g: 0.4,
     visualPortions: [
-      { id: 'vp_v02_1', label: '1/2 plato (hojas frescas)', type: 'plate_half', approxGrams: 120, description: 'Base para ensalada abundante (~28 kcal)' },
-      { id: 'vp_v02_2', label: '1 Taza cocida', type: 'cup', approxGrams: 180, description: 'Espinacas salteadas (~41 kcal)' },
+      { id: 'vp_v02_1', label: '1/2 plato (hojas frescas)', type: 'plate_half', approxGrams: 120, description: 'Base para ensalada (~28 kcal)' },
     ],
   },
   {
     id: 'food_v03',
     name: 'Tomate fresco en rodajas',
+    emoji: '🍅',
     category: 'verdura',
     caloriesPer100g: 18,
     proteinPer100g: 0.9,
     carbsPer100g: 3.9,
     fatPer100g: 0.2,
     visualPortions: [
-      { id: 'vp_v03_1', label: '1 Tomate mediano entero', type: 'unit', approxGrams: 120, description: '1 tomate redondo en rodajas (~22 kcal)' },
-      { id: 'vp_v03_2', label: '1/2 plato de ensalada', type: 'plate_half', approxGrams: 180, description: 'Porción amplia de ensalada (~32 kcal)' },
+      { id: 'vp_v03_1', label: '1 Tomate mediano entero', type: 'unit', approxGrams: 120, description: '1 tomate redondo (~22 kcal)' },
     ],
   },
   {
     id: 'food_v04',
     name: 'Zanahoria fresca o cocida',
+    emoji: '🥕',
     category: 'verdura',
     caloriesPer100g: 41,
     proteinPer100g: 0.9,
@@ -388,7 +406,6 @@ export const DEFAULT_FOODS: Food[] = [
     fatPer100g: 0.2,
     visualPortions: [
       { id: 'vp_v04_1', label: '1 Zanahoria mediana (unidad)', type: 'unit', approxGrams: 90, description: '1 pieza (~37 kcal, 8g C)' },
-      { id: 'vp_v04_2', label: '1 Taza rallada', type: 'cup', approxGrams: 110, description: 'Taza para ensalada (~45 kcal, 10g C)' },
     ],
   },
 
@@ -396,19 +413,20 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_f01',
     name: 'Plátano / Banana madura',
+    emoji: '🍌',
     category: 'fruta',
     caloriesPer100g: 89,
     proteinPer100g: 1.1,
     carbsPer100g: 22.8,
     fatPer100g: 0.3,
     visualPortions: [
-      { id: 'vp_f01_1', label: '1 Plátano mediano (unidad)', type: 'unit', approxGrams: 120, description: '1 pieza sin cáscara (~107 kcal, 27g C)' },
-      { id: 'vp_f01_2', label: 'Medio plátano (pre-entreno)', type: 'unit', approxGrams: 60, description: 'Energía rápida (~53 kcal, 14g C)' },
+      { id: 'vp_f01_1', label: '1 Plátano mediano (unidad)', type: 'unit', approxGrams: 120, description: '1 pieza (~107 kcal, 27g C)' },
     ],
   },
   {
     id: 'food_f02',
     name: 'Manzana con piel',
+    emoji: '🍎',
     category: 'fruta',
     caloriesPer100g: 52,
     proteinPer100g: 0.3,
@@ -421,6 +439,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_f03',
     name: 'Fresas / Frutillas frescas',
+    emoji: '🍓',
     category: 'fruta',
     caloriesPer100g: 32,
     proteinPer100g: 0.7,
@@ -428,7 +447,6 @@ export const DEFAULT_FOODS: Food[] = [
     fatPer100g: 0.3,
     visualPortions: [
       { id: 'vp_f03_1', label: '1 Taza de fresas enteras', type: 'cup', approxGrams: 150, description: 'Taza colmada de frutos rojos (~48 kcal, 11g C)' },
-      { id: 'vp_f03_2', label: '1 Puñado grande (~8 unidades)', type: 'fist', approxGrams: 120, description: 'Snack fresco bajo en calorías (~38 kcal, 9g C)' },
     ],
   },
 
@@ -436,6 +454,7 @@ export const DEFAULT_FOODS: Food[] = [
   {
     id: 'food_l01',
     name: 'Yogur griego natural sin azúcar',
+    emoji: '🥛',
     category: 'lacteo',
     caloriesPer100g: 65,
     proteinPer100g: 10.0,
@@ -443,25 +462,25 @@ export const DEFAULT_FOODS: Food[] = [
     fatPer100g: 0.5,
     visualPortions: [
       { id: 'vp_l01_1', label: '1 Pote individual / Unidad', type: 'unit', approxGrams: 125, description: 'Envase tradicional (~81 kcal, 12.5g P)' },
-      { id: 'vp_l01_2', label: '1 Taza medidora', type: 'cup', approxGrams: 200, description: 'Porción alta en proteína (~130 kcal, 20g P)' },
     ],
   },
   {
     id: 'food_l02',
-    name: 'Leche de vaca descremada / desnatada',
+    name: 'Leche de vaca descremada',
+    emoji: '🥛',
     category: 'lacteo',
     caloriesPer100g: 34,
     proteinPer100g: 3.4,
     carbsPer100g: 5.0,
     fatPer100g: 0.1,
     visualPortions: [
-      { id: 'vp_l02_1', label: '1 Vaso / Taza estándar (240ml)', type: 'cup', approxGrams: 240, description: 'Vaso de desayuno (~82 kcal, 8g P)' },
-      { id: 'vp_l02_2', label: 'Medio vaso / chorro en café', type: 'cup', approxGrams: 100, description: 'Para cortar el café (~34 kcal, 3.4g P)' },
+      { id: 'vp_l02_1', label: '1 Vaso estándar (240ml)', type: 'cup', approxGrams: 240, description: 'Vaso de desayuno (~82 kcal, 8g P)' },
     ],
   },
   {
     id: 'food_l03',
-    name: 'Queso fresco campesino / Panela',
+    name: 'Queso fresco campesino',
+    emoji: '🧀',
     category: 'lacteo',
     caloriesPer100g: 174,
     proteinPer100g: 15.0,
@@ -469,8 +488,6 @@ export const DEFAULT_FOODS: Food[] = [
     fatPer100g: 11.5,
     visualPortions: [
       { id: 'vp_l03_1', label: '1 Rebanada gruesa (palma)', type: 'slice', approxGrams: 50, description: 'Rebanada para desayuno (~87 kcal, 7.5g P)' },
-      { id: 'vp_l03_2', label: '2 Rebanadas', type: 'slice', approxGrams: 100, description: 'Porción principal (~174 kcal, 15g P)' },
     ],
   },
 ];
-

@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import { useNutrition } from '../../context/NutritionContext';
 import { calculateEquivalents } from '../../lib/exchanges';
 import ComparisonCard from './ComparisonCard';
-import { X, ArrowRightLeft, Sparkles, AlertCircle } from 'lucide-react';
+import { X, Sparkles, AlertCircle } from 'lucide-react';
 
 interface ExchangeModalProps {
   onClose: () => void;
@@ -22,55 +22,53 @@ export default function ExchangeModal({ onClose }: ExchangeModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 border border-stone-200/80 dark:border-slate-800 rounded-3xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
         {/* Header Modal */}
-        <div className="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-teal-50 dark:bg-teal-950/40 text-teal-600 dark:text-teal-400">
-              <ArrowRightLeft className="w-5 h-5" />
-            </div>
+        <div className="px-6 py-5 border-b border-stone-100 dark:border-slate-800 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="text-3xl">🔄</span>
             <div>
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                Motor de Intercambios Inteligentes
+              <h3 className="text-lg font-black text-stone-900 dark:text-white">
+                Sustitutos Equivalentes
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Sustituciones de la categoría <strong className="capitalize text-emerald-600 dark:text-emerald-400">{activeEntryToExchange.category}</strong>
+              <p className="text-xs text-stone-500 dark:text-slate-400 font-medium">
+                Alimentos del grupo <strong className="capitalize text-emerald-600 dark:text-emerald-400">{activeEntryToExchange.category}</strong> con calorías iguales (±5%)
               </p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+            className="p-2 rounded-xl text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition bouncy-hover"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Resumen del alimento a reemplazar */}
-        <div className="px-5 py-3 bg-slate-50 dark:bg-slate-800/40 border-b border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-xs">
+        <div className="px-6 py-3.5 bg-stone-50/80 dark:bg-slate-800/40 border-b border-stone-100 dark:border-slate-800 flex items-center justify-between text-xs">
           <div>
-            <span className="text-slate-500">Reemplazando:</span>{' '}
-            <strong className="text-slate-900 dark:text-white font-bold">
+            <span className="text-stone-500 font-medium">Reemplazando:</span>{' '}
+            <strong className="text-stone-900 dark:text-white font-black">
               {activeEntryToExchange.foodName}
             </strong>{' '}
-            <span className="text-slate-500">
+            <span className="text-stone-500">
               ({activeEntryToExchange.portionUsed || `${activeEntryToExchange.grams}g`})
             </span>
           </div>
 
-          <div className="font-semibold text-slate-800 dark:text-slate-200">
+          <div className="font-black text-stone-800 dark:text-slate-200">
             {activeEntryToExchange.calories} kcal • P: {activeEntryToExchange.protein}g • C: {activeEntryToExchange.carbs}g • G: {activeEntryToExchange.fat}g
           </div>
         </div>
 
-        {/* Lista de Sugerencias Equivalentes */}
-        <div className="p-5 overflow-y-auto space-y-3 flex-1">
+        {/* Lista de Sugerencias */}
+        <div className="p-6 overflow-y-auto space-y-3.5 flex-1">
           {equivalents.length === 0 ? (
-            <div className="text-center py-12 text-slate-400 text-xs">
-              <AlertCircle className="w-8 h-8 mx-auto mb-2 opacity-50" />
-              <p>No se encontraron otros alimentos registrados en la categoría {activeEntryToExchange.category}.</p>
-              <p className="mt-1">Agrega más alimentos en &quot;Mis Alimentos&quot; para habilitar más sustituciones.</p>
+            <div className="text-center py-12 text-stone-400 text-xs">
+              <span className="text-4xl block mb-2">🍽️</span>
+              <p className="font-bold">No hay otros alimentos registrados en la categoría {activeEntryToExchange.category}.</p>
+              <p className="mt-1">Agrega más alimentos en &quot;Mi Plato & Alimentos&quot; para habilitar más sustituciones.</p>
             </div>
           ) : (
             equivalents.map((sub) => (
@@ -90,4 +88,3 @@ export default function ExchangeModal({ onClose }: ExchangeModalProps) {
     </div>
   );
 }
-
